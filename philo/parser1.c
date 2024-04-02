@@ -6,29 +6,47 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/02 03:41:56 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/02 22:07:03 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int ac, char **av)
+
+void	paser(int ac, char **av)
 {
-	printf ("hi");
-	if (ac == 1)
-		exit (0);
-	if (ac > 5)
-		exit (1);
-	printf("%s\n", av[0]);
-	exit (0);
-	// parser(ac, av);
-	return (0);
+	t_data	*st;
+
+	if (checker(ac, av))
+		error(st, 2);
+	st = malloc (sizeof(t_data));
+	if (!st)
+		error(st, 1);
+	st->philo_n = my_atoi(av[0]);
+	// st->time_2_die = my_atoi(av[1]);
 }
 
-void	error(t_data *st, int y)
+// unsigned long long	my_atoi(char *s)
+// {
+
+// }
+
+int	checker(int ac, char **av)
 {
-	if (y == 1)
-		write (2, "malloc failure !", 16 );
-	free (st);
-	exit (1);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < ac)
+	{
+		j = 0;
+		while (av[i][j])
+		{
+			if ((av[i][j] >= '0' && av[i][j] <= '9'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
