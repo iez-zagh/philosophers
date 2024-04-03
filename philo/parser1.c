@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 05:45:57 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/03 17:53:58 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	parser(int ac, char **av)
 	st->time_2_sleep = my_atoi(st, av[4]);
 	if (ac == 6)
 		st->eat_n = my_atoi(st, av[5]);
-	st->forks = malloc (sizeof(int) * st->philo_n);
-	if (!st->forks)
-		error (st, 1);
-	initalize_threads(st);
+	threads1(st);
 }
 
 size_t	my_atoi(t_data *st, char *s)

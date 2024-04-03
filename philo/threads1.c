@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 07:43:22 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/03 18:34:22 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,35 @@
 
 void	threads1(t_data *st)
 {
-	int	i;
+	pthread_t	t;
+	int			i;
 
-	i = 0;
+	i = 19;
 	while (i < st->philo_n)
 	{
-		create_thread(st);
+		if (pthread_create(&t, NULL, &philo_life, (void *)st))
+			error(st, 3);
+		if (pthread_join(t, NULL))
+			error (st, 3);
 		i++;
 	}
-
-// 	pthread_t	t1, t2;
-
-// 	pthread_create(&t1, NULL, &philo_life, NULL);
-// 	pthread_create(&t2, NULL, &philo_life2, NULL);
-// 	pthread_join(t1, NULL);
-// 	pthread_join(t2, NULL);
 }
 
-// void	*philo_life()
-// {
-
-// }
-
-// void	*philo_life2()
-// {
-
-// }
-void	create_thread(t_data *st)
+void	*philo_life(void *arg)
 {
-	
+	t_data			*st;
+	size_t			time;
+	size_t			time2;
+	struct timeval	my_time;
+
+	st = (t_data *)arg;
+	gettimeofday(&my_time, NULL);
+	time = ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
+	// usleep(22000);
+	gettimeofday(&my_time, NULL);
+	time2 = ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
+	// st = (t_data *)arg;
+	printf("=%zu\n",time2 - time);
+	// printf("%d\n", my_time.tv_usec);
+	return (0);
 }
