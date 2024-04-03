@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 07:41:26 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/03 07:43:22 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,5 @@ void	threads1(t_data *st)
 // }
 void	create_thread(t_data *st)
 {
-
+	
 }
