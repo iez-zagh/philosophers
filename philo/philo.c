@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 02:04:34 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/03 05:38:14 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ void	error(t_data *st, int y)
 	if (y == 1)
 		write (2, "malloc faillure!\n", 17);
 	if (y == 2)
-		write (2, "there is some thing wrong in the given arguments!\n", 41);
-	if (!st)
+		write (2, "there is some thing wrong in the given arguments!\n", 50);
+	if (y == 3)
 		write (2,
 			"big number, it's gona take so much time, try some thing smaller\n",
-			66);
+			64);
 	if (!st)
 		free (st);
 	exit (1);

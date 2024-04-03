@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 03:23:29 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/03 07:33:43 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
+
+// #define malloc(x) NULL;
 
 typedef struct s_data
 {
@@ -32,8 +34,8 @@ void		parser(int ac, char **av);
 int			checker(int ac, char **av);
 void		error(t_data *st, int y);
 size_t		my_atoi(t_data *st, char *s);
-void		*philo_life();
-void		threads1(void);
+void		*philo_life(t_data *st);
+void		threads1(t_data *st);
 void		initalize_threads(t_data *st);
-void	*philo_life2();
+
 #endif
