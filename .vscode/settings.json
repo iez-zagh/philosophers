@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"iosfwd": "C",
+		"pthread.h": "c",
+		"__locale": "c",
+		"unistd.h": "c"
+	}
+}
