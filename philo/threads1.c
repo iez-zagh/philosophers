@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 18:34:22 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/04 00:23:43 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,12 @@ void	*philo_life(void *arg)
 	st = (t_data *)arg;
 	gettimeofday(&my_time, NULL);
 	time = ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
-	// usleep(22000);
+	usleep(st->time_2_eat * 1000);
 	gettimeofday(&my_time, NULL);
 	time2 = ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
 	// st = (t_data *)arg;
-	printf("=%zu\n",time2 - time);
+
+	printf("%zu\n",time2 - time);
 	// printf("%d\n", my_time.tv_usec);
 	return (0);
 }
