@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 05:38:14 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/04 08:14:21 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	error(t_data *st, int y)
 		write (2, "malloc faillure!\n", 17);
 	if (y == 2)
 		write (2, "there is some thing wrong in the given arguments!\n", 50);
+	if (y == 4)
+		write (2, "error in gettimeofday function!\n", 32);
 	if (y == 3)
 		write (2,
 			"big number, it's gona take so much time, try some thing smaller\n",

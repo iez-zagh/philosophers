@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/03 18:01:32 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/04 23:08:54 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,21 @@ typedef struct s_data
 	int		time_2_sleep;
 	int		*forks;
 	s_philo	*s_philo;
-}				t_data;
+}			t_data;
 
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define THINK "is thinking"
+# define FORK "has taken a fork"
+# define DIED "died ☠️"
 
 void		parser(int ac, char **av);
 int			checker(int ac, char **av);
 void		error(t_data *st, int y);
-size_t		my_atoi(t_data *st, char *s);
+size_t		my_atoi(char *s);
 void		*philo_life(void *arg);
 void		threads1(t_data *st);
+size_t		get_time(t_data *st);
+int			ft_usleep(useconds_t time, t_data *st);
 
 #endif
