@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/05 00:25:33 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/04/18 23:27:47 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	threads1(t_data *st)
 {
 	pthread_t	t;
+	mutex		forks[philo_n];
 	int			i;
 
 	i = 0;
@@ -34,7 +35,6 @@ void	*philo_life(void *arg)
 	size_t	time1;
 	size_t	time2;
 
-	puts("hi");
 	st = (t_data *)arg;
 	time1 = get_time(st);
 	ft_usleep(st->time_2_eat, st);
