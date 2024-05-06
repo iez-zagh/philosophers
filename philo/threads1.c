@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -18,6 +19,9 @@ void	threads1(t_data *st)
 	mutex		forks[philo_n];
 	int			i;
 
+	pthread_mutex_t mutex;
+
+	pthread_mutex_init(&mutex, NULL);
 	i = 0;
 	while (i < st->philo_n)
 	{
@@ -38,6 +42,7 @@ void	*philo_life(void *arg)
 	st = (t_data *)arg;
 	time1 = get_time(st);
 	ft_usleep(st->time_2_eat, st);
+	
 	time2 = get_time(st);
 	printf("%zu\n", time2 - time1);
 	return (0);
