@@ -15,12 +15,14 @@
 
 void	threads1(t_data *st)
 {
+	pthread_mutex_t mutex;
 	pthread_t	t;
-	mutex		forks[philo_n];
 	int			i;
 
-	pthread_mutex_t mutex;
 
+	pthread_mutex_t forks[st->philo_n];
+	(void)forks;
+	// mutex forks[philo_n];
 	pthread_mutex_init(&mutex, NULL);
 	i = 0;
 	while (i < st->philo_n)
