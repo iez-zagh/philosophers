@@ -25,27 +25,24 @@ void	threads1(t_data *st)
 	i = 0;
 	while (i < st->philo_n)
 	{
-		pthread_create(&t, NULL, &philo_life, NULL);
+		pthread_create(&t, NULL, &philo_life, st);
 		pthread_join(t, NULL);
-		// puts("hello");
 		i++;
 	}
-	// puts("hello");
 }
 
 void	*philo_life(void *arg)
 {
 	t_data	*st;
-	// size_t	time1;
-	// size_t	time2;
+	size_t	time1;
+	size_t	time2;
 
 	st = (t_data *)arg;
-	puts("hello from thread");
-	// st = (t_data *)arg;
-	// time1 = get_time(st)	;
-	// ft_usleep(st->time_2_eat, st);
-	// time2 = get_time(st);
-	// printf("%zu\n", time2 - time1);
+	st = (t_data *)arg;
+	time1 = get_time(st)	;
+	ft_usleep(st->time_2_eat, st);
+	time2 = get_time(st);
+	printf("%zu\n", time2 - time1);
 	return (0);
 }
 
@@ -64,5 +61,5 @@ size_t	get_time(t_data *st)
 
 	(void)st;
 	gettimeofday(&the_time, NULL);
-	return ((the_time.tv_sec * 1000));
+	return ((the_time.tv_sec * 1000) );
 }

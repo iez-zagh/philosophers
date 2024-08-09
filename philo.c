@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 10:16:43 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/09 16:12:31 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int 	parser(int ac, char **av)
 	st->time_2_sleep = my_atoi(av[4]);
 	if (ac == 6)
 		st->eat_n = my_atoi(av[5]);
-	// if (st->philo_n > 200 || st->time_2_die > 1000000
-	// 	|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
+	if (st->philo_n > 200 || st->time_2_die > 1000000
+		|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
 	threads1(st);
 	return (0);
 }
