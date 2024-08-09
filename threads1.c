@@ -61,5 +61,5 @@ size_t	get_time(t_data *st)
 
 	(void)st;
 	gettimeofday(&the_time, NULL);
-	return ((the_time.tv_sec * 1000) );
+	return ((the_time.tv_sec * 1000));
 }

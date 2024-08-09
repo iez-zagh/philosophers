@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 16:12:31 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/09 17:09:35 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int 	parser(int ac, char **av)
 	if (checker(ac, av))
 	{
 		write (2, "numeric argument required\n", 25);
+		how_to_use();
 		return (1);
 	}
 	st->philo_n = my_atoi(av[1]);
@@ -35,6 +36,9 @@ int 	parser(int ac, char **av)
 		st->eat_n = my_atoi(av[5]);
 	if (st->philo_n > 200 || st->time_2_die > 1000000
 		|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
+	{
+		return (1);
+	}
 	threads1(st);
 	return (0);
 }
