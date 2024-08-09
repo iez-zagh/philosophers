@@ -19,7 +19,6 @@ void	threads1(t_data *st)
 	pthread_t	t;
 	int			i;
 
-
 	// pthread_mutex_t forks[st->philo_n];
 	// mutex forks[philo_n];
 	pthread_mutex_init(&mutex, NULL);
@@ -30,6 +29,7 @@ void	threads1(t_data *st)
 		i++;
 	}
 	pthread_join(t, NULL);
+	puts("hello");
 }
 
 void	*philo_life(void *arg)
@@ -39,7 +39,7 @@ void	*philo_life(void *arg)
 	size_t	time2;
 
 	st = (t_data *)arg;
-	time1 = get_time(st);
+	time1 = get_time(st)	;
 	ft_usleep(st->time_2_eat, st);
 	
 	time2 = get_time(st);
@@ -48,7 +48,7 @@ void	*philo_life(void *arg)
 }
 
 int	ft_usleep(useconds_t time, t_data *st)
-{
+{	
 	size_t	start;
 	start = get_time(st);
 	while ((get_time(st) - start) < time)
@@ -58,9 +58,9 @@ int	ft_usleep(useconds_t time, t_data *st)
 
 size_t	get_time(t_data *st)
 {
-	struct timeval	my_time;
+	struct timeval	the_time;
 
 	(void)st;
-	gettimeofday(&my_time, NULL);
-	return ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
+	gettimeofday(&the_time, NULL);
+	return ((the_time.tv_sec * 1000) + (the_time.tv_usec / 1000));
 }

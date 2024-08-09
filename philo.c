@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 09:35:58 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:16:43 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int 	parser(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	if (ac == 1)
-		exit (0);
 	if (ac < 5 || ac > 6)
 	{
-		write (2, "wrong number of arguments !!\n", 29);
-		exit (1);
+		how_to_use();
+		return (1);
 	}
 	if (parser(ac, av))
 		return (1);

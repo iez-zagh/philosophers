@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 09:33:09 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:12:50 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PHILO_H
 
 # include <stdio.h>
-#include <sys/time.h>
+# include <sys/time.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <pthread.h>
@@ -47,11 +47,12 @@ typedef struct s_data
 # define FORK "has taken a fork"
 # define DIED "died ☠️"
 
-int			checker(int ac, char **av);
-size_t		my_atoi(char *s);
-void		*philo_life(void *arg);
-void		threads1(t_data *st);
-size_t		get_time(t_data *st);
-int			ft_usleep(useconds_t time, t_data *st);
+int		checker(int ac, char **av);
+size_t	my_atoi(char *s);
+void	*philo_life(void *arg);
+void	threads1(t_data *st);
+size_t	get_time(t_data *st);
+int		ft_usleep(useconds_t time, t_data *st);
+void	how_to_use(void);
 
 #endif
