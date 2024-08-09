@@ -20,19 +20,16 @@ void	threads1(t_data *st)
 	int			i;
 
 
-	pthread_mutex_t forks[st->philo_n];
-	(void)forks;
+	// pthread_mutex_t forks[st->philo_n];
 	// mutex forks[philo_n];
 	pthread_mutex_init(&mutex, NULL);
 	i = 0;
 	while (i < st->philo_n)
 	{
-		if (pthread_create(&t, NULL, &philo_life, (void *)st))
-			error(st, 3);
+		pthread_create(&t, NULL, &philo_life, NULL);
 		i++;
 	}
-	if (pthread_join(t, NULL))
-		error (st, 3);
+	pthread_join(t, NULL);
 }
 
 void	*philo_life(void *arg)
@@ -63,7 +60,7 @@ size_t	get_time(t_data *st)
 {
 	struct timeval	my_time;
 
-	if (gettimeofday(&my_time, NULL))
-		error(st, 4);
+	(void)st;
+	gettimeofday(&my_time, NULL);
 	return ((my_time.tv_sec * 1000) + (my_time.tv_usec / 1000));
 }

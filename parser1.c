@@ -6,32 +6,11 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/04/04 23:12:53 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/09 09:33:03 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-
-void	parser(int ac, char **av)
-{
-	t_data	*st;
-
-	st = malloc (sizeof(t_data));
-	if (!st)
-		error(st, 1);
-	if (checker(ac, av) == 1)
-		error(st, 2);
-	st->philo_n = my_atoi(av[1]);
-	st->time_2_die = my_atoi(av[2]);
-	st->time_2_eat = my_atoi(av[3]);
-	st->time_2_sleep = my_atoi(av[4]);
-	if (ac == 6)
-		st->eat_n = my_atoi(av[5]);
-	// if (st->philo_n > 200 || st->time_2_die > 1000000
-	// 	|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
-	threads1(st);
-}
 
 size_t	my_atoi(char *s)
 {
