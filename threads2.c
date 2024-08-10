@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 13:46:25 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 14:00:53 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	routine(t_data *st)
 	(void)st;
 	// while (1)
 	// {
-		for (int i = 0;i <5;i++)
+		for (int i = 0;i <1;i++)
 			puts("hello from thread");
 		
 	// }

@@ -26,10 +26,11 @@ void	threads1(t_data *st)
 	while (i < st->philo_n)
 	{
 		pthread_create(&t, NULL, &philo_life, st);
+		pthread_detach(t);
 		i++;
 	}
-	usleep (100);
-	pthread_join(t, NULL);
+	puts("hello world");
+// 	pthread_join(t, NULL);
 }
 
 void	*philo_life(void *strct)
