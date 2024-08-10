@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 09:35:47 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:46:20 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_data
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
 # define FORK "has taken a fork"
-# define DIED "died ☠️"
+# define DIED "died"
 
 int		checker(int ac, char **av);
 size_t	my_atoi(char *s);

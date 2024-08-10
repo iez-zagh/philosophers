@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 09:19:40 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:48:21 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	checker(int ac, char **av)
 	while (i < ac)
 	{
 		j = 0;
-		if (av[i][j] == '+')
+		if (av[i][j] == '+' && av[i][j + 1])
 			j++;
 		while (av[i][j])
 		{
