@@ -17,6 +17,7 @@ void	threads1(t_data *st)
 {
 	// pthread_mutex_t mutex;
 	pthread_t	t;
+	
 	int			i;
 	// pthread_mutex_t forks[st->philo_n];
 	// mutex forks[philo_n];
@@ -25,9 +26,9 @@ void	threads1(t_data *st)
 	while (i < st->philo_n)
 	{
 		pthread_create(&t, NULL, &philo_life, st);
-		pthread_join(t, NULL);
 		i++;
 	}
+	pthread_join(t, NULL);
 }
 
 void	*philo_life(void *strct)
@@ -37,7 +38,8 @@ void	*philo_life(void *strct)
 	size_t	time2;
 
 	st = (t_data *)strct;
-	time1 = get_time(st)	;
+	routine(st);
+	time1 = get_time(st);
 	ft_usleep(st->time_2_eat, st);
 	time2 = get_time(st);
 	printf("%zu\n", time2 - time1);
