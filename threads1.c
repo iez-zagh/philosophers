@@ -28,6 +28,7 @@ void	threads1(t_data *st)
 		pthread_create(&t, NULL, &philo_life, st);
 		i++;
 	}
+	usleep (100);
 	pthread_join(t, NULL);
 }
 
