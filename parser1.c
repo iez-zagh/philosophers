@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 09:48:21 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 10:14:29 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void how_to_use(void)
 {
 	printf("Usage: ./philo <num_philos> <time_die> <time_eat> <time_sleep> [num_eat]\n");
 	printf("\nArguments:\n");
-	printf("  <num_philos> : Number of philosophers.\n");
-	printf("  <time_die>   : Time in ms before a philosopher dies.\n");
-	printf("  <time_eat>   : Time in ms for a philosopher to eat.\n");
-	printf("  <time_sleep> : Time in ms for a philosopher to sleep.\n");
+	printf("  <num_philos> : Number of philosophers <= 200.\n");
+	printf("  <time_die>   : Time in ms before a philosopher dies. <= int_max\n");
+	printf("  <time_eat>   : Time in ms for a philosopher to eat. <= int_max\n");
+	printf("  <time_sleep> : Time in ms for a philosopher to sleep. <= int_max\n");
 	printf("  [num_eat]    : Optional. Times each philosopher must eat before ending.\n");
 	printf("\nExample:\n");
 	printf("  ./philo 5 800 200 100 7\n");
-	printf("  Runs with 5 philosophers, 800ms to die, 200ms to eat, 100ms to sleep, and each must eat 7 times.\n");
+	printf("  Runs with 5 philosophers, 800ms to die, 200ms to eat, 100ms to sleep, and each must eat 7 times at least.\n");
 }

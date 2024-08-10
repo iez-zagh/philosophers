@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 09:45:32 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 10:16:38 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,9 @@ int 	parser(int ac, char **av)
 	// printf("%d]]\n", st.time_2_die);
 	// printf("%d]]\n", st.time_2_eat);
 	// printf("%d]]\n", st.time_2_sleep);
-	// if (st->philo_n > 200 || st->time_2_die > 1000000
-	// 	|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
-	// {
-	// 	return (1);
-	// }
+	if (st.time_2_die == -1
+		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
+		return (write(2, "some thing wrong in the args\n", 29), how_to_use(), 1);
 	threads1(&st);
 	return (0);
 }
