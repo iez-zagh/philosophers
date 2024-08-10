@@ -18,7 +18,6 @@ void	threads1(t_data *st)
 	// pthread_mutex_t mutex;
 	pthread_t	t;
 	int			i;
-	(void)st;
 	// pthread_mutex_t forks[st->philo_n];
 	// mutex forks[philo_n];
 	// pthread_mutex_init(&mutex, NULL);
@@ -31,14 +30,13 @@ void	threads1(t_data *st)
 	}
 }
 
-void	*philo_life(void *arg)
+void	*philo_life(void *strct)
 {
 	t_data	*st;
 	size_t	time1;
 	size_t	time2;
 
-	st = (t_data *)arg;
-	st = (t_data *)arg;
+	st = (t_data *)strct;
 	time1 = get_time(st)	;
 	ft_usleep(st->time_2_eat, st);
 	time2 = get_time(st);

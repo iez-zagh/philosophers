@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 12:35:53 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:35:47 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <stdlib.h>
 # include <pthread.h>
 # include <time.h>
+# include <limits.h>
 
-// #define malloc(x) NULL;
 
 typedef struct s_philo
 {
@@ -28,7 +28,6 @@ typedef struct s_philo
 	int	ate;
 	int	sleep;
 }				s_philo;
-
 
 typedef struct s_data
 {
@@ -49,7 +48,7 @@ typedef struct s_data
 
 int		checker(int ac, char **av);
 size_t	my_atoi(char *s);
-void	*philo_life(void *arg);
+void	*philo_life(void *strct);
 void	threads1(t_data *st);
 size_t	get_time(t_data *st);
 int		ft_usleep(useconds_t time, t_data *st);

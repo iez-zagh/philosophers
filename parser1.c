@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 17:11:23 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:19:40 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,19 @@
 
 size_t	my_atoi(char *s)
 {
-	size_t	nbr = 0;
-	int		i = 0;
+	size_t	nbr;
+	int		i;
 
 	i = 0;
+	nbr = 0;
 	while (s[i])
 	{
 		nbr = nbr * 10 + s[i] - '0';
+		if (nbr > INT_MAX)
+			return (-1);
 		i++;
 	}
-	return nbr;
+	return (nbr);
 }
 
 int	checker(int ac, char **av)

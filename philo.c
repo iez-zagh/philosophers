@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/09 17:09:35 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/10 09:36:17 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,33 @@
 
 int 	parser(int ac, char **av)
 {
-	t_data	*st;
+	t_data	st;
 
-	st = malloc (sizeof(t_data));
-	if (!st)
-	{
-		write(2, "malloc failure\n", 15);
-		return (1);
-	}
 	if (checker(ac, av))
 	{
-		write (2, "numeric argument required\n", 25);
+		write (2, "some thing wrong in the args\n", 29);
 		how_to_use();
 		return (1);
 	}
-	st->philo_n = my_atoi(av[1]);
-	st->time_2_die = my_atoi(av[2]);
-	st->time_2_eat = my_atoi(av[3]);
-	st->time_2_sleep = my_atoi(av[4]);
+	st.philo_n = my_atoi(av[1]);
+	st.time_2_die = my_atoi(av[2]);
+	st.time_2_eat = my_atoi(av[3]);
+	st.time_2_sleep = my_atoi(av[4]);
 	if (ac == 6)
-		st->eat_n = my_atoi(av[5]);
-	if (st->philo_n > 200 || st->time_2_die > 1000000
-		|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
 	{
-		return (1);
+		st.eat_n = my_atoi(av[5]);
+		// printf("%d]]\n", st.eat_n);
 	}
-	threads1(st);
+	// printf("%d]]\n", st.philo_n);
+	// printf("%d]]\n", st.time_2_die);
+	// printf("%d]]\n", st.time_2_eat);
+	// printf("%d]]\n", st.time_2_sleep);
+	// if (st->philo_n > 200 || st->time_2_die > 1000000
+	// 	|| st->time_2_eat > 1000000 || st->time_2_sleep > 1000000)
+	// {
+	// 	return (1);
+	// }
+	threads1(&st);
 	return (0);
 }
 

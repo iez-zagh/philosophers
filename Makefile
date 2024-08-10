@@ -5,6 +5,7 @@ RESET_TEXT = \033[0m
 
 NAME = philo
 BONUS = philo_bonus
+RACE=-fsanitize=thread
 CFLAGS = -Wall -Werror -Wextra -pthread
 CC = gcc
 
