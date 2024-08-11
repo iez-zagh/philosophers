@@ -12,8 +12,67 @@
 
 #include "philo.h"
 
+
+t_mutex	*get_last(t_mutex *philo)
+{
+	if (!philo)
+		return (NULL);
+	while (philo->next)
+		philo = philo->next;
+	return (philo);
+}
+
+void	add_back(t_mutex **philo, t_mutex *new)
+{
+	if (!*philo)
+		*philo = new;
+	else
+	{
+		get_last(*philo)->next = new;
+		new->next = NULL;
+	}
+}
+
 void	routine(t_data *st)
 {
 	(void)st;
 	puts("hello from thread");
+}
+
+t_mutex *create_mutex(int i)
+{
+	int		j;
+	t_mutex	*mutex1;
+	t_mutex	*new;
+
+	j = 0;
+	mutex1 = NULL;
+	while (j < i)
+	{
+		puts("hello");
+		new = malloc(sizeof(t_mutex));
+		// new->mutex = malloc(sizeof(pthread_mutex_t));
+		pthread_mutex_init(&(new->mutex), NULL);
+		add_back(&mutex1, new);
+		j++;
+	}
+	return (mutex1);
+}
+
+
+void	initializing_threads(t_data *st)
+{
+	t_mutex	*mutex;
+
+	mutex = create_mutex(st->philo_n);
+	st->mutexs = mutex;
+	// int		i;
+	// t_philo	*philo;
+
+	// i = 0;
+	// philo = NULL;
+	// while (i < st->philo_n)
+	// {
+		
+	// }
 }

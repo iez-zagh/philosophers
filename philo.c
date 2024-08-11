@@ -37,7 +37,7 @@ int 	parser(int ac, char **av)
 	if (st.time_2_die == -1
 		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
 		return (write(2, "some thing wrong in the args\n", 29), how_to_use(), 1);
-	threads1(&st);
+	initializing_threads(&st);
 	return (0);
 }
 

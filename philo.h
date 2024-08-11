@@ -18,15 +18,23 @@
 # include <unistd.h>
 # include <pthread.h>
 # include <time.h>
+# include <stdlib.h>
 # include <limits.h>
 
 
 typedef struct s_philo
 {
-	int	died;
-	int	ate;
-	int	sleep;
-}				s_philo;
+	int				index;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	struct s_philo *next;
+}				t_philo;
+
+typedef struct s_mutex
+{
+	pthread_mutex_t mutex;
+	struct s_mutex *next;
+}       t_mutex;
 
 typedef struct s_data
 {
@@ -36,7 +44,8 @@ typedef struct s_data
 	int	time_2_eat;
 	int	time_2_sleep;
 	int	*forks;
-	s_philo	*s_philo;
+	t_mutex	*mutexs;
+	t_philo	*s_philo;
 }			t_data;
 
 # define EAT "is eating"
@@ -53,5 +62,7 @@ size_t	get_time(t_data *st);
 int		ft_usleep(useconds_t time, t_data *st);
 void	how_to_use(void);
 void	routine(t_data *st);
+void	initializing_threads(t_data *st);
+
 
 #endif
