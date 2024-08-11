@@ -24,15 +24,15 @@
 
 typedef struct s_mutex
 {
-	pthread_mutex_t *mutex;
+	pthread_mutex_t mutex;
 	struct s_mutex *next;
 }       t_mutex;
 
 typedef struct s_philo
 {
 	int				index;
-	pthread_mutex_t	*l_fork;
-	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	l_fork;
+	pthread_mutex_t	r_fork;
 	struct s_philo *next;
 }				t_philo;
 
