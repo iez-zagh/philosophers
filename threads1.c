@@ -29,8 +29,6 @@ void	threads1(t_data *st)
 		pthread_detach(t);
 		i++;
 	}
-	puts("hello world");
-// 	pthread_join(t, NULL);
 }
 
 void	*philo_life(void *strct)

@@ -15,10 +15,5 @@
 void	routine(t_data *st)
 {
 	(void)st;
-	// while (1)
-	// {
-		for (int i = 0;i <1;i++)
-			puts("hello from thread");
-		
-	// }
+	puts("hello from thread");
 }
