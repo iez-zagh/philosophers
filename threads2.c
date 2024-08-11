@@ -50,7 +50,7 @@ t_mutex *create_mutex(int i)
 	while (j < i)
 	{
 		new = malloc(sizeof(t_mutex));
-		pthread_mutex_init(&(new->mutex), NULL);
+		pthread_mutex_init((new->mutex), NULL);
 		add_back(&mutex1, new);
 		j++;
 	}
@@ -64,13 +64,5 @@ void	initializing_threads(t_data *st)
 
 	mutex = create_mutex(st->philo_n);
 	st->mutexs = mutex;
-	// int		i;
-	// t_philo	*philo;
-
-	// i = 0;
-	// philo = NULL;
-	// while (i < st->philo_n)
-	// {
-		
-	// }
+	initialze_philo(st);
 }
