@@ -49,9 +49,7 @@ t_mutex *create_mutex(int i)
 	mutex1 = NULL;
 	while (j < i)
 	{
-		puts("hello");
 		new = malloc(sizeof(t_mutex));
-		// new->mutex = malloc(sizeof(pthread_mutex_t));
 		pthread_mutex_init(&(new->mutex), NULL);
 		add_back(&mutex1, new);
 		j++;
