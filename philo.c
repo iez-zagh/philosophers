@@ -28,6 +28,8 @@ int 	parser(int ac, char **av)
 	st.time_2_sleep = my_atoi(av[4]);
 	if (ac == 6)
 		st.eat_n = my_atoi(av[5]);
+	else
+		st.eat_n = -1;
 	// printf("%d]]\n", st.philo_n);
 	// printf("%d]]\n", st.time_2_die);
 	// printf("%d]]\n", st.time_2_eat);

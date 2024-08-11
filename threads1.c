@@ -26,7 +26,7 @@ void	threads1(t_data *st)
 	while (i < st->philo_n)
 	{
 		pthread_create(&t, NULL, &philo_life, st);
-		pthread_detach(t);
+		// pthread_detach(t);
 		i++;
 	}
 }
