@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/12 14:13:01 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/12 18:10:54 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,19 @@
 
 void	create_threads(t_data *st)
 {
-	int		i;
-	t_philo	*philo;
+	t_philo		*philo;
+	pthread_t	id;
 
-	i = 0;
 	philo = st->s_philo;
-	while (i < (st->philo_n / 2))
+	pthread_mutex_lock(st->death);
+	pthread_create(&id, NULL, wait_death, st);
+	while (philo) //create a thread to wait for the death mutex
 	{
-		pthread_create(&(philo->id),NULL, routine, philo);
-		// if (i != 3)
-		// pthread_detach((philo->id));
+		if (philo->index == (st->philo_n / 2))
+			break;
+		pthread_create(&(philo->id),NULL, routine, st);
+		pthread_detach((philo->id)); //this for no waiting the threads
 		philo = philo->next;
-		i++;
 	}
-	pthread_join(philo->id, NULL);
-	sleep(5);
+	pthread_join(id, NULL);
 }
