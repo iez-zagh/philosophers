@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 14:00:53 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/12 14:11:14 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,23 @@ void	add_back(t_mutex **philo, t_mutex *new)
 	}
 }
 
-void	routine(t_data *st)
+void	*routine(void *st)
 {
-	(void)st;
-	puts("hello from thread");
+	t_philo	*philo;
+
+	philo = (t_philo *)st;
+	while (1)
+	{
+		// puts("inside of a thread");
+		pthread_mutex_lock(philo->l_fork);
+		printf("%d has taken a fork\n", philo->index);
+		pthread_mutex_lock(philo->r_fork);
+		printf("%d has taken a fork\n", philo->index);
+		printf("philo %d is eating\n", philo->index);
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_unlock(philo->r_fork);
+		usleep(800);
+	}
 }
 
 t_mutex *create_mutex(int i)
@@ -65,4 +78,5 @@ void	initializing_threads(t_data *st)
 	mutex = create_mutex(st->philo_n);
 	st->mutexs = mutex;
 	initialze_philo(st);
+	create_threads(st);
 }

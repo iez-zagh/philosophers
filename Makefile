@@ -9,7 +9,7 @@ RACE=-fsanitize=thread
 CFLAGS = -Wall -Werror -Wextra -pthread
 CC = gcc
 
-M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c
+M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c
 # B_SOURCES = $(wildcard $(BONUS_DIR)/*.c)
 
 M_OBJECTS = $(M_SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/10 13:05:41 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/12 12:03:07 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,33 +21,34 @@
 # include <stdlib.h>
 # include <limits.h>
 
-
 typedef struct s_mutex
 {
-	pthread_mutex_t mutex;
-	struct s_mutex *next;
-}       t_mutex;
+	pthread_mutex_t	mutex;
+	struct s_mutex	*next;
+}		t_mutex;
 
 typedef struct s_philo
 {
+	pthread_t		id;
 	int				index;
-	pthread_mutex_t	l_fork;
-	pthread_mutex_t	r_fork;
-	struct s_philo *next;
-}				t_philo;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
+	struct s_philo	*next;	
+}		t_philo;
 
+//  # define malloc(x) NULL //fix this
 
 typedef struct s_data
 {
-	int	philo_n;
-	int	eat_n;
-	int	time_2_die;
-	int	time_2_eat;
-	int	time_2_sleep;
-	int	*forks;
+	int		philo_n;
+	int		eat_n;
+	int		time_2_die;
+	int		time_2_eat;
+	int		time_2_sleep;
+	int		*forks;
 	t_mutex	*mutexs;
 	t_philo	*s_philo;
-}			t_data;
+}		t_data;
 
 # define EAT "is eating"
 # define SLEEP "is sleeping"
@@ -62,8 +63,9 @@ void	threads1(t_data *st);
 size_t	get_time(t_data *st);
 int		ft_usleep(useconds_t time, t_data *st);
 void	how_to_use(void);
-void	routine(t_data *st);
+void	*routine(void *st);
 void	initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
+void	create_threads(t_data *st);
 
 #endif

@@ -26,25 +26,24 @@ void	initialze_philo(t_data *st)
 	t_philo	*new;
 	t_mutex	*mutex;
 	int		i;
-	// int		flag;
 
 	i = 0;
-	// flag = 0;
 	philo = NULL;
 	mutex = st->mutexs;
-	puts("hello");
 	while (i < st->philo_n)
 	{
 		new = malloc(sizeof(t_philo));//protection
 		new->index = i;
-		// new->l_fork = malloc(sizeof(pthread_mutex_t));
-		new->l_fork = mutex->mutex;
-		// printf("%p]]\n", &(mutex->mutex));
-		// new->r_fork = mutex->next->mutex
+		new->l_fork = &(mutex->mutex);
+		if (!mutex->next)
+			new->r_fork = &(st->mutexs->mutex);
+		else
+		{
+			new->r_fork = &(mutex->next->mutex);
+			mutex = mutex->next;
+		}
 		add_back2(&philo, new);
-		mutex = mutex->next;
 		i++;
 	}
-	puts("hello");
 	st->s_philo = philo;
 }
