@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/12 19:53:01 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/12 20:15:25 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	*routine(void *arg)
 {
 	t_philo	*philo;
 	t_data	*st;
+	// size_t	time;
 
+	
 	st = (t_data *)arg;
 	philo = get_node(st->s_philo);
 	while (1 && st->flag)
@@ -62,7 +64,11 @@ void	*routine(void *arg)
 		pthread_mutex_lock(philo->r_fork);
 		printf("%d has taken a fork\n", philo->index);
 		printf("%d is eating\n", philo->index);
+		//time to eat
+		//time to eat
 		printf("%d is sleeping\n", philo->index);
+		//time to sleep
+		printf("%d is thinking\n", philo->index);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
 		usleep(50000);
@@ -93,13 +99,10 @@ t_mutex *create_mutex(int i)
 void	initializing_threads(t_data *st)
 {
 	t_mutex			*mutex;
-	pthread_mutex_t	death;
 
 	mutex = create_mutex(st->philo_n);
 	st->mutexs = mutex;
 	initialze_philo(st);
-	pthread_mutex_init(&death, NULL);
-	st->death = &death;
 	create_threads(st);
 }
 
@@ -112,6 +115,6 @@ void	*wait_death(void *arg)
 	st->flag = 1;
 	pthread_mutex_lock(st->death);
 	st->flag = 0;
-	printf("died\n");
+	write(1, "died\n", 5);
 	return (NULL);
 }

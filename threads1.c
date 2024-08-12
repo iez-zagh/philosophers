@@ -13,24 +13,6 @@
 
 #include "philo.h"
 
-void	threads1(t_data *st)
-{
-	// pthread_mutex_t mutex;
-	pthread_t	t;
-	
-	int			i;
-	// pthread_mutex_t forks[st->philo_n];
-	// mutex forks[philo_n];
-	// pthread_mutex_init(&mutex, NULL);
-	i = 0;
-	while (i < st->philo_n)
-	{
-		pthread_create(&t, NULL, &philo_life, st);
-		// pthread_detach(t);
-		i++;
-	}
-}
-
 void	*philo_life(void *strct)
 {
 	t_data	*st;
@@ -38,7 +20,6 @@ void	*philo_life(void *strct)
 	size_t	time2;
 
 	st = (t_data *)strct;
-	routine(st);
 	time1 = get_time(st);
 	ft_usleep(st->time_2_eat, st);
 	time2 = get_time(st);
