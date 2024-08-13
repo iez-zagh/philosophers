@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/13 18:11:11 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/13 21:52:24 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ t_philo	*get_node(t_philo *philo)
 	return (philo);
 
 }
+
+void print(t_data *st, t_philo *philo, char *msg)
+{
+	printf("%lld  %d   %s\n", get_time() - st->time,philo->index, msg);
+}
+
 void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -60,13 +66,14 @@ void	*routine(void *arg)
 	{
 		// printf("index=%d]] l == %p r == %p\n", philo->index, philo->l_fork, philo->r_fork);
 		// return (NULL);
-		// pthread_mutex_lock(philo->l_fork);
-		pthread_mutex_lock(&(st->death));
-		printf("%lld  %d   has taken a fork\n", get_time() - st->time,philo->index);
+		// pthread_mutex_lock(&(st->death));
+		pthread_mutex_lock(philo->l_fork);
+		// printf("%lld  %d   has taken a fork\n", get_time() - st->time,philo->index);
+		print(st, philo, "has taken a fork");
 		pthread_mutex_lock(philo->r_fork);
 		printf("%lld  %d   has taken a fork\n", get_time() - st->time, philo->index);
-		philo->last_meal = get_time();
 		printf("%lld  %d   is eating\n", get_time() - st->time, philo->index);
+		philo->last_meal = get_time();
 		ft_usleep(st->time_2_eat);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
