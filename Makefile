@@ -5,8 +5,8 @@ RESET_TEXT = \033[0m
 
 NAME = philo
 BONUS = philo_bonus
-RACE=-fsanitize=thread
-CFLAGS = -Wall -Werror -Wextra -pthread
+R=-fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -pthread -g
 CC = gcc
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c

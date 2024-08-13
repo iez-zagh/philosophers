@@ -33,7 +33,7 @@ void	initialze_philo(t_data *st)
 	while (i < st->philo_n)
 	{
 		new = malloc(sizeof(t_philo));//protection
-		new->index = i;
+		new->index = i + 1;
 		new->l_fork = &(mutex->mutex);
 		if (!mutex->next)
 			new->r_fork = &(st->mutexs->mutex);

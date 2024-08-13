@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/12 19:52:09 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/13 18:07:45 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,20 @@ typedef struct s_philo
 {
 	pthread_t		id;
 	int				index;
-	pthread_mutex_t		*l_fork;
-	pthread_mutex_t		*r_fork;
+	unsigned long long int	last_meal;
+	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*r_fork;
 	struct s_philo	*next;	
 }		t_philo;
 
 typedef struct s_data
 {
+	pthread_mutex_t			node_mutex;
+	unsigned long long int	time;
 	int				flag;
 	int				philo_n;
 	int				eat_n;
-	pthread_mutex_t	*death;
+	pthread_mutex_t	death;
 	int				eat_times;
 	int				time_2_die;
 	int				time_2_eat;
@@ -49,8 +52,6 @@ typedef struct s_data
 	t_mutex			*mutexs;
 	t_philo			*s_philo;
 }		t_data;
-
-
 
 //  # define malloc(x) NULL //fix this
 
@@ -60,12 +61,12 @@ typedef struct s_data
 # define FORK "has taken a fork"
 # define DIED "died"
 
+// this here
+void	ft_free(t_data *st);
 int		checker(int ac, char **av);
 size_t	my_atoi(char *s);
-void	*philo_life(void *strct);
-void	threads1(t_data *st);
-size_t	get_time(t_data *st);
-int		ft_usleep(useconds_t time, t_data *st);
+size_t	get_time(void);
+int		ft_usleep(useconds_t time);
 void	how_to_use(void);
 void	*routine(void *st);
 void	initializing_threads(t_data *st);

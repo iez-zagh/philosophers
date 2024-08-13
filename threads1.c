@@ -13,34 +13,19 @@
 
 #include "philo.h"
 
-void	*philo_life(void *strct)
-{
-	t_data	*st;
-	size_t	time1;
-	size_t	time2;
-
-	st = (t_data *)strct;
-	time1 = get_time(st);
-	ft_usleep(st->time_2_eat, st);
-	time2 = get_time(st);
-	printf("%zu\n", time2 - time1);
-	return (0);
-}
-
-int	ft_usleep(useconds_t time, t_data *st)
+int	ft_usleep(useconds_t time)
 {	
 	size_t	start;
-	start = get_time(st);
-	while ((get_time(st) - start) < time)
+	start = get_time();
+	while ((get_time() - start) < time)
 		usleep(time / 10);
 	return(0);
 }
 
-size_t	get_time(t_data *st)
+size_t	get_time(void)
 {
 	struct timeval	the_time;
 
-	(void)st;
 	gettimeofday(&the_time, NULL);
-	return ((the_time.tv_sec * 1000));
+	return ((the_time.tv_sec * 1000) + (the_time.tv_usec / 1000));
 }
