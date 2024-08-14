@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 11:46:29 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:10:04 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ typedef struct s_data
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define FORK "has taken a fork"
+# define L_FORK "has taken a left fork"
+# define R_FORK "has taken a right fork"
 # define DIED "died"
 
 // this here

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 12:58:37 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:44:32 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,11 @@ void	*routine(void *arg)
 	pthread_mutex_unlock(&(st->node_mutex));
 	while (1)
 	{
+		
 		pthread_mutex_lock(philo->l_fork);
-		print(st, philo, FORK);
+		print(st, philo, L_FORK);
 		pthread_mutex_lock(philo->r_fork);
-		print(st, philo, FORK);
+		print(st, philo, R_FORK);
 		philo->last_meal = get_time();
 		print(st, philo, EAT);
 		ft_usleep(st->time_2_eat);
