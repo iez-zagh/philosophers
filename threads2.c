@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 11:27:46 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:58:37 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,8 +132,8 @@ void	*wait_death(void *arg)
 	philo = st->s_philo;
 	while (philo)
 	{
-		// if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
-		// 	return (NULL);
+		if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
+			return (NULL);
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
 			st->die = 1;

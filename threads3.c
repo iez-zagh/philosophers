@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 11:28:35 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 13:02:20 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ void	create_threads(t_data *st)
 	pthread_mutex_init(&(st->death), NULL); //this is error
 	while (philo)
 	{
-		if (!(philo->index % 2)) //need ot improve this better
-			usleep(800);
+		philo->last_meal = get_time();
 		pthread_create(&(philo->id),NULL, routine, st);
 		pthread_detach((philo->id)); //this for no waiting the threads
+		if (!(philo->index % 2)) //need ot improve this better
+			usleep(1000);
 		philo = philo->next;
 	}
 	pthread_create(&id, NULL, wait_death, st);
