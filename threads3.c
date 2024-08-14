@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 13:02:20 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:41:48 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	create_threads(t_data *st)
 {
 	t_philo		*philo;
-	pthread_t	id;
 
 	philo = st->s_philo;
 	pthread_mutex_init(&(st->node_mutex), NULL);
+	pthread_mutex_init(&(st->todie_mutex), NULL);
 	st->die = 0;
 	st->time = get_time();
 	pthread_mutex_init(&(st->death), NULL); //this is error
@@ -31,6 +31,5 @@ void	create_threads(t_data *st)
 			usleep(1000);
 		philo = philo->next;
 	}
-	pthread_create(&id, NULL, wait_death, st);
-	pthread_join(id, NULL);
+	wait_death(st);
 }

@@ -18,7 +18,7 @@ int	ft_usleep(useconds_t time)
 	size_t	start;
 	start = get_time();
 	while ((get_time() - start) < time)
-		usleep(time / 10);
+		usleep(200);
 	return(0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 13:44:32 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:41:06 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_philo	*get_node(t_philo *philo)
 	j = 0;
 	while (j < i)
 	{
+		// printf("%d]]\n", philo->index);
 		philo = philo->next;
 		j++;
 	}
@@ -51,8 +52,8 @@ t_philo	*get_node(t_philo *philo)
 void print(t_data *st, t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&(st->death));
-	if (st->die)
-		return ;
+	// if (st->die)
+	// 	return ;
 	printf("%lld  %d   %s\n", get_time() - st->time,philo->index, msg);
 	pthread_mutex_unlock(&(st->death));
 }
@@ -124,28 +125,31 @@ int	check_meals(t_philo *philo, int n)
 	}
 	return (0);
 }
-void	*wait_death(void *arg)
+void	wait_death(t_data *st)
 {
-	t_data	*st;
 	t_philo	*philo;
 
-	st = (t_data *)arg;
 	philo = st->s_philo;
 	while (philo)
 	{
-		if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
-			return (NULL);
+		// if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
+		// 	return (NULL);
+		pthread_mutex_lock(&(st->todie_mutex));
+		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
-			st->die = 1;
+			// st->die = 1;
 			pthread_mutex_lock(&(st->death));
 			printf("%lld  %d   died\n",get_time() - st->time, philo->index);
-			return (NULL);
+			// return (NULL);
+			return ;
 		}
 		if (!philo->next)
 			philo = st->s_philo;
 		else
 		philo = philo->next;
+		pthread_mutex_unlock(&(st->todie_mutex));
+		pthread_mutex_unlock(&(philo->last_meal_mutex));
 	}
-	return (NULL);
+	// return (NULL);
 }

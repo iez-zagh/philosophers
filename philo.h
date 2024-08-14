@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 13:10:04 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:39:46 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_philo
 	int				meals_n;
 	int				index;
 	unsigned long long int	last_meal;
+	pthread_mutex_t	last_meal_mutex;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	struct s_philo	*next;	
@@ -46,6 +47,7 @@ typedef struct s_data
 	int				philo_n;
 	int				eat_n;
 	pthread_mutex_t	death;
+	pthread_mutex_t	todie_mutex;
 	int				time_2_die;
 	int				time_2_eat;
 	int				time_2_sleep;
@@ -73,6 +75,6 @@ void	*routine(void *st);
 void	initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
 void	create_threads(t_data *st);
-void	*wait_death(void *arg);
+void	wait_death(t_data *st);
 
 #endif
