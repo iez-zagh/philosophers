@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/13 18:07:45 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/14 11:26:26 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_mutex
 typedef struct s_philo
 {
 	pthread_t		id;
+	int				meals_n;
 	int				index;
 	unsigned long long int	last_meal;
 	pthread_mutex_t	*l_fork;
@@ -41,11 +42,10 @@ typedef struct s_data
 {
 	pthread_mutex_t			node_mutex;
 	unsigned long long int	time;
-	int				flag;
+	int				die;
 	int				philo_n;
 	int				eat_n;
 	pthread_mutex_t	death;
-	int				eat_times;
 	int				time_2_die;
 	int				time_2_eat;
 	int				time_2_sleep;

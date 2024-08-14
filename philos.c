@@ -35,6 +35,8 @@ void	initialze_philo(t_data *st)
 		new = malloc(sizeof(t_philo));//protection
 		new->index = i + 1;
 		new->l_fork = &(mutex->mutex);
+		new->last_meal = get_time();
+		new->meals_n = 0;
 		if (!mutex->next)
 			new->r_fork = &(st->mutexs->mutex);
 		else
