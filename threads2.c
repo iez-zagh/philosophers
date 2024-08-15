@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/14 16:19:54 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/15 17:21:58 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,27 @@ void	add_back(t_mutex **philo, t_mutex *new)
 		new->next = NULL;
 	}
 }
+
+
+t_mutex *create_mutex(int i)
+{
+	int		j;
+	t_mutex	*mutex1;
+	t_mutex	*new;
+
+	j = 0;
+	mutex1 = NULL;
+	while (j < i)
+	{
+		new = malloc(sizeof(t_mutex));
+		pthread_mutex_init(&(new->mutex), NULL);
+		new->next = NULL;
+		add_back(&mutex1, new);
+		j++;
+	}
+	return (mutex1);
+}
+
 t_philo	*get_node(t_philo *philo)
 {
 	static int	i = 0;
@@ -106,24 +127,6 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-t_mutex *create_mutex(int i)
-{
-	int		j;
-	t_mutex	*mutex1;
-	t_mutex	*new;
-
-	j = 0;
-	mutex1 = NULL;
-	while (j < i)
-	{
-		new = malloc(sizeof(t_mutex));
-		pthread_mutex_init(&(new->mutex), NULL);
-		add_back(&mutex1, new);
-		j++;
-	}
-	return (mutex1);
-}
-
 void	initializing_threads(t_data *st)
 {
 	t_mutex	*mutex;
@@ -131,6 +134,7 @@ void	initializing_threads(t_data *st)
 	mutex = create_mutex(st->philo_n);
 	st->mutexs = mutex;
 	initialze_philo(st);
+	puts("after\n\n");
 	create_threads(st);
 }
 

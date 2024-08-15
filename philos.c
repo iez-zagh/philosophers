@@ -47,6 +47,7 @@ void	initialze_philo(t_data *st)
 			mutex = mutex->next;
 		}
 		add_back2(&philo, new);
+		new->next = NULL;
 		i++;
 	}
 	st->s_philo = philo;

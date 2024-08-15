@@ -6,8 +6,8 @@ RESET_TEXT = \033[0m
 NAME = philo
 BONUS = philo_bonus
 R=-fsanitize=thread -g
-CFLAGS = -Wall -Werror -Wextra -pthread $(R)
-CC = gcc
+CFLAGS = -Wall -Werror -Wextra -pthread -fsanitize=address
+CC = cc
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c
 # B_SOURCES = $(wildcard $(BONUS_DIR)/*.c)
