@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 11:10:28 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 15:23:03 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,6 @@ void	wait_death(t_data *st)
 		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
-			puts("hello ");
 			pthread_mutex_lock(&(st->flag_mutex));
 			st->die = 1;
 			pthread_mutex_unlock(&(st->flag_mutex));
@@ -176,6 +175,6 @@ void	wait_death(t_data *st)
 			philo = st->s_philo;
 		else
 			philo = philo->next;
-			usleep (500);
+		usleep (1000);
 	}
 }
