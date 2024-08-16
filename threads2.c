@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 15:23:03 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:57:41 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void	wait_death(t_data *st)
 	{
 		// if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
 		// 	return (NULL);
+		// puts("hello");
 		pthread_mutex_lock(&(st->todie_mutex));
 		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
@@ -171,10 +172,10 @@ void	wait_death(t_data *st)
 		}
 		pthread_mutex_unlock(&(st->todie_mutex));
 		pthread_mutex_unlock(&(philo->last_meal_mutex));
+		usleep (1000);
 		if (!philo->next)
 			philo = st->s_philo;
 		else
 			philo = philo->next;
-		usleep (1000);
 	}
 }

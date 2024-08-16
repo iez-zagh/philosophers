@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 10:55:55 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 16:50:58 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,12 @@ void	create_threads(t_data *st)
 		philo->last_meal = get_time();
 		pthread_create(&(philo->id),NULL, routine, st);
 		pthread_detach((philo->id)); //this for no waiting the threads
-		if (!(philo->index % 2)) //need ot improve this better
-			usleep(800);
+		if (philo->index == 1 || !(philo->index % 2)) //need ot improve this better
+		{
+			// printf("%d]]\n", philo->index);
+			usleep(1000);
+			// puts("hello");
+		}
 		philo = philo->next;
 	}
 	wait_death(st);
