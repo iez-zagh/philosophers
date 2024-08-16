@@ -6,37 +6,31 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/15 17:21:58 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:44:32 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
 t_mutex	*get_last(t_mutex *philo)
 {
-	puts("hello 3");
 	if (!philo)
 		return (NULL);
 	while (philo->next)
 		philo = philo->next;
-	puts("hello 4");
 	return (philo);
 }
 
 void	add_back(t_mutex **philo, t_mutex *new)
 {
-	puts("hello");
 	if (!*philo)
 		*philo = new;
 	else
 	{
-		puts("here");
 		get_last(*philo)->next = new;
 		new->next = NULL;
 	}
 }
-
 
 t_mutex *create_mutex(int i)
 {
@@ -65,7 +59,6 @@ t_philo	*get_node(t_philo *philo)
 	j = 0;
 	while (j < i)
 	{
-		// printf("%d]]\n", philo->index);
 		philo = philo->next;
 		j++;
 	}
@@ -74,15 +67,16 @@ t_philo	*get_node(t_philo *philo)
 
 }
 
-void print(t_data *st, t_philo *philo, char *msg)
+int print(t_data *st, t_philo *philo, char *msg)
 {
 	pthread_mutex_lock(&(st->flag_mutex));
-	// if (st->die)
-	// 	return ;
-	pthread_mutex_lock(&(st->death));
+	if (st->die)
+		return (1);
 	pthread_mutex_unlock(&(st->flag_mutex));
+	pthread_mutex_lock(&(st->death));
 	printf("%lld  %d   %s\n", get_time() - st->time,philo->index, msg);
 	pthread_mutex_unlock(&(st->death));
+	return (0);
 }
 
 void	*routine(void *arg)
@@ -105,9 +99,11 @@ void	*routine(void *arg)
 
 		
 		pthread_mutex_lock(philo->l_fork);
-		print(st, philo, L_FORK);
+		if (print(st, philo, L_FORK))
+			return (NULL);
 		pthread_mutex_lock(philo->r_fork);
-		print(st, philo, R_FORK);
+		if (print(st, philo, R_FORK))
+			return (NULL);
 
 		
 		pthread_mutex_lock(&(philo->last_meal_mutex));
@@ -115,14 +111,17 @@ void	*routine(void *arg)
 		pthread_mutex_unlock(&(philo->last_meal_mutex));
 
 		
-		print(st, philo, EAT);
+		if (print(st, philo, EAT))
+			return (NULL);
 		ft_usleep(st->time_2_eat);
 		philo->meals_n++; //needs a mutex
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
-		print(st, philo, SLEEP);
+		if (print(st, philo, SLEEP))
+			return (NULL);
 		ft_usleep(st->time_2_sleep);
-		print(st, philo, THINK);
+		if (print(st, philo, THINK))
+			return (NULL);
 	}
 	return (NULL);
 }
@@ -134,7 +133,6 @@ void	initializing_threads(t_data *st)
 	mutex = create_mutex(st->philo_n);
 	st->mutexs = mutex;
 	initialze_philo(st);
-	puts("after\n\n");
 	create_threads(st);
 }
 
@@ -161,20 +159,20 @@ void	wait_death(t_data *st)
 		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
-			pthread_mutex_lock(&(st->death));
 			pthread_mutex_lock(&(st->flag_mutex));
-			st->die = 1;
+			// st->die = 1;
+			pthread_mutex_unlock(&(st->flag_mutex));
+			pthread_mutex_lock(&(st->death));
 			pthread_mutex_lock(&(st->time_mutex));
 			pthread_mutex_lock(&(philo->index_mutex));
 			printf("%lld  %d   died\n",get_time() - st->time, philo->index);
 			return ;
 		}
+		pthread_mutex_unlock(&(st->todie_mutex));
+		pthread_mutex_unlock(&(philo->last_meal_mutex));
 		if (!philo->next)
 			philo = st->s_philo;
 		else
 			philo = philo->next;
-		pthread_mutex_unlock(&(st->todie_mutex));
-		pthread_mutex_unlock(&(philo->last_meal_mutex));
 	}
-	// return (NULL);
 }
