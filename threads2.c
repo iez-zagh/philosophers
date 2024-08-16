@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 19:12:19 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:01:09 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void	wait_death(t_data *st)
 	philo = st->s_philo;
 	while (philo)
 	{
-		if (st->eat_n != -1 && check_meals(st->s_philo, st->eat_n))
+		if (st->eat_n != -1 && !check_meals(st->s_philo, st->eat_n))
 		{
 			pthread_mutex_lock(&(st->death));
 			return ;
