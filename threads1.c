@@ -18,7 +18,7 @@ int	ft_usleep(useconds_t time)
 	size_t	start;
 	start = get_time();
 	while ((get_time() - start) < time) //check the time if its completed
-		usleep(time / 10); //remember this later
+		usleep(100); //remember this later
 	return(0);
 }
 
