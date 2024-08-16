@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 10:48:11 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:55:55 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	create_threads(t_data *st)
 
 	philo = st->s_philo;
 	pthread_mutex_init(&(st->node_mutex), NULL);
-	pthread_mutex_init(&(st->flag_mutex), NULL);
+	// pthread_mutex_init(&(st->flag_mutex), NULL);
 	pthread_mutex_init(&(st->todie_mutex), NULL);
 	st->die = 0;
 	st->time = get_time();
-	pthread_mutex_init(&(st->death), NULL); //this is error
+	pthread_mutex_init(&(st->death), NULL); //could cause an error
 	while (philo)
 	{
 		philo->last_meal = get_time();
