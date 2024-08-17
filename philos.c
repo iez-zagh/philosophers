@@ -24,6 +24,7 @@ void	initialze_philo(t_data *st)
 {
 	t_philo	*philo;
 	t_philo	*new;
+	t_philo	*first;
 	t_mutex	*mutex;
 	int		i;
 
@@ -46,8 +47,12 @@ void	initialze_philo(t_data *st)
 		new->meals_n = 0;
 		mutex = mutex->next;
 		new->next = NULL;
+		if (!i)
+			first = new;
 		add_back2(&philo, new);
 		i++;
 	}
+	if (new)
+		new->next = first;
 	st->s_philo = philo;
 }

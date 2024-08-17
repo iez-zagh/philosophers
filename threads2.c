@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/17 21:40:47 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/18 00:29:53 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&(st->node_mutex));
 	philo = get_node(st->s_philo, st);
 	pthread_mutex_unlock(&(st->node_mutex));
-	pthread_mutex_lock(&(st->var_mutex));
-	while(!st->var)
-		;
-	pthread_mutex_unlock(&(st->var_mutex));
+	// pthread_mutex_lock(&(st->var_mutex));
+	// while(!st->var)
+	// 	;
+	// pthread_mutex_unlock(&(st->var_mutex));
 	// pthread_mutex_lock(&(philo->last_meal_mutex));
 	// pthread_mutex_unlock(&(philo->last_meal_mutex));
 	if (philo && philo->index % 2)
-		usleep(2000);
+		usleep(2000); //check this and make it small
 	while (1)
 	
 	{
@@ -125,17 +125,18 @@ void	*routine(void *arg)
 
 		if (print(st, philo, EAT))
 			return (NULL);
+
+		pthread_mutex_lock(&(philo->last_meal_mutex)); //unlock forks in death
+		philo->last_meal = get_time();
+		pthread_mutex_unlock(&(philo->last_meal_mutex));
+		
 		ft_usleep(st->time_2_eat);
 
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
 		
-		pthread_mutex_lock(&(philo->last_meal_mutex));
-		philo->last_meal = get_time();
-		pthread_mutex_unlock(&(philo->last_meal_mutex));
 
-		
-		
+
 		pthread_mutex_lock(&(philo->meals_n_mutex));
 		philo->meals_n++; 
 		pthread_mutex_unlock(&(philo->meals_n_mutex));
@@ -186,14 +187,13 @@ void	wait_death(t_data *st)
 			pthread_mutex_lock(&(st->time_mutex));
 			pthread_mutex_lock(&(philo->index_mutex));
 			printf("%lld  %d   died\n",get_time() - st->time, philo->index);
-			// pthread_mutex_unlock(&(st->todie_mutex));
-			// pthread_mutex_unlock(&(philo->last_meal_mutex));
-			usleep(1000);
+			// pthread_mutex_unlock(&(st->time_mutex));
+			// pthread_mutex_unlock(&(philo->index_mutex));
+			// pthread_mutex_unlock(st->death);//allocate on heap
 			return ;
 		}
 		pthread_mutex_unlock(&(philo->last_meal_mutex));
 		pthread_mutex_unlock(&(st->todie_mutex));
-		// usleep(100);
 		philo = philo->next;
 	}
 }
