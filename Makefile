@@ -6,7 +6,7 @@ RESET_TEXT = \033[0m
 NAME = philo
 BONUS = philo_bonus
 R=-fsanitize=thread -g
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c
 # B_SOURCES = $(wildcard $(BONUS_DIR)/*.c)
@@ -43,3 +43,10 @@ fclean : clean
 re : fclean all
 
 .PHONY : all bonus clean fclean re
+
+
+# // if (st->eat_n != -1 && !check_meals(st->s_philo, st->eat_n))
+# 		// {
+# 		// 	pthread_mutex_lock((st->death));
+# 		// 	return ;
+# 		// }

@@ -34,9 +34,13 @@ void	initialze_philo(t_data *st)
 	{
 		new = malloc(sizeof(t_philo));//protection
 		if (!new)
+		{
+			perror("malloc");
 			return ;
+		}
 		new->index = i + 1;
 		pthread_mutex_init(&(new->last_meal_mutex), NULL);
+		pthread_mutex_init(&(new->meals_n_mutex), NULL);
 		new->l_fork = &(mutex->mutex);
 		new->meals_n = 0;
 		if (!mutex->next)

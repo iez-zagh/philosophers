@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/16 18:44:41 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:10:27 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <pthread.h>
 # include <time.h>
 # include <stdlib.h>
+# include <stdbool.h>
 # include <limits.h>
 
 typedef struct s_mutex
@@ -35,6 +36,7 @@ typedef struct s_philo
 	pthread_mutex_t	index_mutex;
 	unsigned long long int	last_meal;
 	pthread_mutex_t	last_meal_mutex;
+	pthread_mutex_t	meals_n_mutex;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	struct s_philo	*next;	
@@ -45,10 +47,15 @@ typedef struct s_data
 	pthread_mutex_t			node_mutex;
 	unsigned long long int	time;
 	int				die;
+	int 			index;
+	int				var;
 	int				philo_n;
 	int				eat_n;
-	pthread_mutex_t	death;
+	pthread_mutex_t	*death;
 	pthread_mutex_t	time_mutex;
+
+	pthread_mutex_t	var_mutex;
+	
 	pthread_mutex_t	todie_mutex;
 	pthread_mutex_t	flag_mutex;
 	int				time_2_die;
@@ -63,8 +70,7 @@ typedef struct s_data
 # define EAT "is eating"
 # define SLEEP "is sleeping"
 # define THINK "is thinking"
-# define L_FORK "has taken a fork"
-# define R_FORK "has taken a fork"
+# define FORK "has taken a fork"
 # define DIED "died"
 
 // this here
