@@ -41,17 +41,12 @@ void	initialze_philo(t_data *st)
 		new->index = i + 1;
 		pthread_mutex_init(&(new->last_meal_mutex), NULL);
 		pthread_mutex_init(&(new->meals_n_mutex), NULL);
-		new->l_fork = &(mutex->mutex);
+		new->r_fork = &(mutex->mutex);
+		new->l_fork = &(mutex->next->mutex);
 		new->meals_n = 0;
-		if (!mutex->next)
-			new->r_fork = &(st->mutexs->mutex);
-		else
-		{
-			new->r_fork = &(mutex->next->mutex);
-			mutex = mutex->next;
-		}
-		add_back2(&philo, new);
+		mutex = mutex->next;
 		new->next = NULL;
+		add_back2(&philo, new);
 		i++;
 	}
 	st->s_philo = philo;
