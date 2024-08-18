@@ -4,12 +4,12 @@ YELLOW_TEXT = \033[1;33m
 RESET_TEXT = \033[0m
 
 NAME = philo
-BONUS = philo_bonus
-R=-fsanitize=thread -g
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+BONUS = philo_bonusB
+R=-fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c
-# B_SOURCES = $(wildcard $(BONUS_DIR)/*.c)
+# B_SOURCES = $(wildcard $(ONUS_DIR)/*.c)
 
 M_OBJECTS = $(M_SOURCES:.c=.o)
 # B_OBJECTS = $(B_SOURCES:.c=.o)

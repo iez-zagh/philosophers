@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/17 23:55:06 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/18 14:36:20 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	f(void)
 {
 	system("leaks philo");
 }
+
 int	main(int ac, char **av)
 {
 	// atexit (f);
