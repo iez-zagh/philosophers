@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/18 15:16:57 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/18 15:24:26 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_mutex *create_mutex(int i)
 	while (j < i)
 	{
 		new = malloc(sizeof(t_mutex));
+		if (!new)
+			return (NULL);
 		pthread_mutex_init(&(new->mutex), NULL);
 		new->next = NULL;
 		if (!j)
