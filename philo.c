@@ -6,13 +6,13 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/18 14:36:20 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 00:00:38 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int 	parser(int ac, char **av)
+int	parser(int ac, char **av)
 {
 	t_data	st;
 
@@ -34,8 +34,10 @@ int 	parser(int ac, char **av)
 		return (0);
 	if (st.time_2_die == -1
 		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
-		return (write(2, "some thing wrong in the args\n", 29), how_to_use(), 1);
-	initializing_threads(&st);
+		return (write(2, "some thing wrong in the args\n", 29)
+			, how_to_use(), 1);
+	if (initializing_threads(&st))
+		return (1);
 	return (0);
 }
 

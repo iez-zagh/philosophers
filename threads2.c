@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/18 15:24:26 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/18 22:11:30 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_mutex *create_mutex(int i)
 	{
 		new = malloc(sizeof(t_mutex));
 		if (!new)
-			return (NULL);
+			return (write(2, "malloc error\n", 13), NULL);
 		pthread_mutex_init(&(new->mutex), NULL);
 		new->next = NULL;
 		if (!j)
@@ -79,7 +79,7 @@ int print(t_data *st, t_philo *philo, char *msg)
 	pthread_mutex_lock(&st->death);
 	if (st->die)
 		return (pthread_mutex_unlock(&st->death), 1);
-	printf("%lld  %d   %s\n", get_time() - st->time,philo->index, msg);
+	printf("%lld %d %s\n", get_time() - st->time,philo->index, msg);
 	pthread_mutex_unlock(&st->death);
 	return (0);
 }
@@ -93,7 +93,7 @@ void	*routine(void *arg)
 	pthread_mutex_lock(&(st->node_mutex));
 	philo = get_node(st->s_philo, st);
 	pthread_mutex_unlock(&(st->node_mutex));
-	if (philo && philo->index % 2)
+	if (philo && philo->index % 2 == 0)
 		usleep(2000);
 	while (1)
 	{
@@ -132,11 +132,16 @@ void	*routine(void *arg)
 	return (NULL);
 }
 
-void	initializing_threads(t_data *st)
+int	initializing_threads(t_data *st)
 {
 	st->mutexs = create_mutex(st->philo_n);
+	if (!st->mutexs)
+		return (1);
 	initialze_philo(st);
+	if (!st->s_philo)
+		return (ft_free(st, 0), 1);
 	create_threads(st);
+	return (0);
 }
 
 int	check_meals(t_philo *philo, int n, int number)
@@ -154,6 +159,7 @@ int	check_meals(t_philo *philo, int n, int number)
 	}
 	return (0);
 }
+
 void	wait_death(t_data *st)
 {
 	t_philo	*philo;
@@ -168,24 +174,25 @@ void	wait_death(t_data *st)
 			pthread_mutex_unlock(&(st->death));
 			return ;
 		}
-		pthread_mutex_lock(&(st->todie_mutex));
+		// pthread_mutex_lock(&(st->todie_mutex));
 		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
+			pthread_mutex_unlock(&(philo->last_meal_mutex));
 			pthread_mutex_lock(&st->death);
 			st->die = 1;
 			pthread_mutex_unlock(&st->death);
-			pthread_mutex_lock(&(st->time_mutex));
-			pthread_mutex_lock(&(philo->index_mutex));
+			// pthread_mutex_lock(&(st->time_mutex));
+			// pthread_mutex_lock(&(philo->index_mutex));
 			printf("%lld  %d   died\n",get_time() - st->time, philo->index);
-			pthread_mutex_unlock(&(st->time_mutex));
-			pthread_mutex_unlock(&(philo->index_mutex));
-			pthread_mutex_unlock(&(st->todie_mutex));
-			pthread_mutex_unlock(&(philo->last_meal_mutex));
+			// pthread_mutex_unlock(&(st->time_mutex));
+			// pthread_mutex_unlock(&(philo->index_mutex));
+			// pthread_mutex_unlock(&(st->todie_mutex));
 			return ;
 		}
 		pthread_mutex_unlock(&(philo->last_meal_mutex));
-		pthread_mutex_unlock(&(st->todie_mutex));
+		// pthread_mutex_unlock(&(st->todie_mutex));
+		// usleep(500);
 		philo = philo->next;
 	}
 }
