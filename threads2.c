@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 18:23:21 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 20:52:57 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ t_philo	*init_philo(t_data *st)
 
 int	sleep_think(t_data *st, t_philo *philo)
 {
+	pthread_mutex_lock(&(philo->meals_n_mutex));
+	philo->meals_n++;
+	pthread_mutex_unlock(&(philo->meals_n_mutex));
 	if (print(st, philo, SLEEP))
 		return (1);
 	ft_usleep(st->time_2_sleep);
@@ -51,6 +54,8 @@ void	*true_routine(t_data *st, t_philo *philo)
 		pthread_mutex_lock(philo->l_fork);
 		if (print(st, philo, FORK))
 			return (pthread_mutex_unlock(philo->l_fork), NULL);
+		if (st->philo_n == 1)
+			return (pthread_mutex_unlock(philo->l_fork), NULL);
 		pthread_mutex_lock(philo->r_fork);
 		if (print(st, philo, FORK))
 			return (pthread_mutex_unlock(philo->l_fork),
@@ -64,9 +69,6 @@ void	*true_routine(t_data *st, t_philo *philo)
 		ft_usleep(st->time_2_eat);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
-		pthread_mutex_lock(&(philo->meals_n_mutex));
-		philo->meals_n++;
-		pthread_mutex_unlock(&(philo->meals_n_mutex));
 		if (sleep_think(st, philo))
 			return (NULL);
 	}
