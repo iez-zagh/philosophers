@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 18:26:33 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:52:54 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	parser(int ac, char **av)
 		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
 		return (write(2, "some thing wrong in the args\n", 29)
 			, how_to_use(), 1);
-	if (initializing_threads(&st))
-		return (1);
-	return (0);
+	return (initializing_threads(&st));
 }
 
 void	f(void)

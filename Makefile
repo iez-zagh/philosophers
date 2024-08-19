@@ -8,7 +8,7 @@ BONUS = philo_bonusB
 R=-fsanitize=thread
 CFLAGS = -Wall -Werror -Wextra
 
-M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c
+M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c ft_free.c
 # B_SOURCES = $(wildcard $(ONUS_DIR)/*.c)
 
 M_OBJECTS = $(M_SOURCES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 18:14:19 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:30:08 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	how_to_use(void);
 void	*routine(void *st);
 int		initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
-void	create_threads(t_data *st);
+int		create_threads(t_data *st);
 void	wait_death(t_data *st);
 t_mutex	*create_mutex(int i);
 t_philo	*get_node(t_philo *philo, t_data *st);

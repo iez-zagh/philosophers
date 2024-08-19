@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 10:35:33 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 19:52:34 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,5 @@ int	initializing_threads(t_data *st)
 	initialze_philo(st);
 	if (!st->s_philo)
 		return (ft_free(st, 0), 1);
-	create_threads(st);
-	return (0);
+	return (create_threads(st));
 }
