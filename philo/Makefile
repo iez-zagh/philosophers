@@ -6,31 +6,19 @@ RESET_TEXT = \033[0m
 NAME = philo
 BONUS = philo_bonusB
 R=-fsanitize=thread
-# CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c ft_free.c
-# B_SOURCES = $(wildcard $(ONUS_DIR)/*.c)
 
 M_OBJECTS = $(M_SOURCES:.c=.o)
-# B_OBJECTS = $(B_SOURCES:.c=.o)
 
 %.o : %.c philo.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-# %_bonus.o : %.c $(BONUS_DIR)/philo_bonus.h
-# 	@$(CC) $(CFLAGS) -c $< -o $@
-
 all : $(NAME)
-
 $(NAME) : $(M_OBJECTS)
 	@$(CC) $(CFLAGS) $(M_OBJECTS) -o $(NAME)
 	@echo "$(GREEN_TEXT)[the executable created successfully]$(RESET_TEXT)"
-
-# bonus : $(BONUS)
-
-# $(BONUS) : $(B_OBJECTS)
-# 	@$(CC) $(CFLAGS) $(B_OBJECTS) -o $(BONUS)
-# 	@echo "$(GREEN_TEXT)[the bonus executable created successfully]$(RESET_TEXT)"
 
 clean :
 	@rm -rf $(M_OBJECTS)
@@ -42,5 +30,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all bonus clean fclean re
-
+.PHONY : clean
