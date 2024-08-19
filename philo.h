@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 13:05:09 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:14:19 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,10 @@ typedef struct s_data
 	size_t					time;
 	int						die;
 	int						index;
-	int						f;
 	int						philo_n;
 	int						eat_n;
 	pthread_mutex_t			death;	
 	pthread_mutex_t			var_mutex;
-	pthread_mutex_t			f_mutex;
 	int						time_2_die;
 	int						time_2_eat;
 	int						time_2_sleep;

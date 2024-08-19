@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 13:05:40 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:11:43 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	create_threads(t_data *st)
 	pthread_mutex_init(&(st->var_mutex), NULL);
 	pthread_mutex_init(&st->death, NULL);
 	st->die = 0;
-	// st->f = 0;
 	st->time = get_time();
 	while (i++ < n)
 	{
