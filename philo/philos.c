@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 20:47:22 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:49:17 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ t_philo	*change_node(t_mutex *mutex, int i)
 
 	new = malloc(sizeof(t_philo));
 	if (!new)
-		return (NULL);
+		return (write(2, "malloc error\n", 13), NULL);
 	new->index = i + 1;
-	pthread_mutex_init(&(new->last_meal_mutex), NULL);
-	pthread_mutex_init(&(new->meals_n_mutex), NULL);
+	if (pthread_mutex_init(&(new->last_meal_mutex), NULL)
+		|| pthread_mutex_init(&(new->meals_n_mutex), NULL))
+		return (NULL);
 	new->r_fork = &(mutex->mutex);
 	new->l_fork = &(mutex->next->mutex);
 	new->meals_n = 0;
@@ -63,7 +64,6 @@ void	initialze_philo(t_data *st)
 		new = change_node(mutex, i);
 		if (!new)
 		{
-			write(2, "malloc error\n", 13);
 			st->s_philo = NULL;
 			return ;
 		}

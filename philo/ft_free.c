@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads4.c                                         :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 19:53:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 19:55:14 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:48:54 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_philo(t_philo *philo, int n, int flag)
 		{
 			pthread_mutex_destroy(&(philo->last_meal_mutex));
 			pthread_mutex_destroy(&(philo->meals_n_mutex));
-			pthread_mutex_destroy((philo->l_fork));
-			pthread_mutex_destroy((philo->r_fork));
 		}
 		tmp = philo;
 		philo = philo->next;

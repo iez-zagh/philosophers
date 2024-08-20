@@ -11,7 +11,7 @@ M_SOURCES = philos_bonus.c philo_bonus.c parser1_bonus.c threads1_bonus.c thread
 
 M_OBJECTS = $(M_SOURCES:.c=.o)
 
-%.o : %.c philo.h
+%.o : %.c philo_bonus.h
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 all : $(NAME)

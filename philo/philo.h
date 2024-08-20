@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 19:30:08 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:46:09 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <pthread.h>
 # include <time.h>
 # include <stdlib.h>
-# include <stdbool.h>
+// # include <stdbool.h>
 # include <limits.h>
 
 typedef struct s_mutex

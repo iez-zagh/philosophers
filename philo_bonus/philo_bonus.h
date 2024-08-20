@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/19 19:30:08 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:21:20 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
 # include <pthread.h>
-# include <time.h>
+# include <stdio.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <limits.h>
+#include <semaphore.h> 
 
 typedef struct s_mutex
 {
