@@ -10,6 +10,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char	*ft_one_line(char *str, int start, int end)
+{
+	int i = 0;
+	
+}
 
 int	ft_strchr(char *str, int a)
 {
