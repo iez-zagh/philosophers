@@ -3,12 +3,11 @@ GREEN_TEXT = \033[1;32m
 YELLOW_TEXT = \033[1;33m
 RESET_TEXT = \033[0m
 
-NAME = philo
-BONUS = philo_bonusB
+NAME = philo_bonus
 R=-fsanitize=thread
 CFLAGS = -Wall -Werror -Wextra
 
-M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c ft_free.c
+M_SOURCES = philos_bonus.c philo_bonus.c parser1_bonus.c threads1_bonus.c threads2_bonus.c threads3_bonus.c ft_free_bonus.c
 
 M_OBJECTS = $(M_SOURCES:.c=.o)
 
