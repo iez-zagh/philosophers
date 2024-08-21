@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <stack>
+#include <vector>
+#include <map>
 int main()
 {
 
@@ -10,14 +12,13 @@ int main()
 
 	int ac;
 	std::cin >> ac;
-	std::map<long long, int> map;
+	std::vector<long long> v;
 	for (int i =0;i < ac;i++)
 	{
 		int u;
 		std::cin >> u;
-		if (u >= h)
-			some++;
-		else
-			some += 2;
+		v[i] = u;
 	}
+	std::cout << v[0];
+
 }

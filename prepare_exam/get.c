@@ -37,7 +37,8 @@ char    *get(int fd)
     {
 		if (ft_strchr(buffer, '\n') !=  -1)
 		{
-			return ();
+			return (ft_oneline(buffer));
+			//sub the buffer to eleminate the returned line
 		}
 		str  = malloc (BUF);
 		if (!str)

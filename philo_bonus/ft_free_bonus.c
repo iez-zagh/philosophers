@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 19:53:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/20 09:31:23 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/21 19:46:28 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	free_philo(t_philo *philo, int n, int flag)
 	}
 }
 
-void	free_mutex(t_mutex *mutex, int n)
+void	free_mutex(t_sem *mutex, int n)
 {
 	int		i;
-	t_mutex	*tmp;
+	t_sem	*tmp;
 
 	i = 0;
 	while (mutex && i++ < n)

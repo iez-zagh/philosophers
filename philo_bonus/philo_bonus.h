@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/20 16:21:20 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:56:30 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,45 +15,36 @@
 
 # include <sys/time.h>
 # include <unistd.h>
-# include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
 #include <semaphore.h> 
 
-typedef struct s_mutex
+typedef struct s_sem
 {
-	pthread_mutex_t	mutex;
-	struct s_mutex	*next;
-}		t_mutex;
+	sem_t			*sem;
+	struct s_sem	*next;
+}		t_sem;
 
 typedef struct s_philo
 {
-	pthread_t				id;
 	int						meals_n;
 	int						index;
 	unsigned long long int	last_meal;
-	pthread_mutex_t			last_meal_mutex;
-	pthread_mutex_t			meals_n_mutex;
-	pthread_mutex_t			*l_fork;
-	pthread_mutex_t			*r_fork;
 	struct s_philo			*next;	
 }		t_philo;
 
 typedef struct s_data
 {
-	pthread_mutex_t			node_mutex;
 	size_t					time;
 	int						die;
 	int						index;
 	int						philo_n;
 	int						eat_n;
-	pthread_mutex_t			death;	
-	pthread_mutex_t			var_mutex;
 	int						time_2_die;
 	int						time_2_eat;
 	int						time_2_sleep;
-	t_mutex					*mutexs;
+	t_sem					*sem;
 	t_philo					*s_philo;
 }		t_data;
 
@@ -74,7 +65,7 @@ int		initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
 int		create_threads(t_data *st);
 void	wait_death(t_data *st);
-t_mutex	*create_mutex(int i);
+t_sem	*create_semaphore(int i);
 t_philo	*get_node(t_philo *philo, t_data *st);
 
 #endif

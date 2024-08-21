@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/20 09:31:23 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:52:18 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parser(int ac, char **av)
 		st.eat_n = my_atoi(av[5]);
 	else
 		st.eat_n = -1;
-	if (st.eat_n == 0)
+	if (!st.eat_n || !st.philo_n)
 		return (0);
 	if (st.time_2_die == -1
 		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
@@ -65,15 +65,11 @@ int	check_meals(t_philo *philo, t_data *st)
 	i = 0;
 	while (i++ < st->philo_n)
 	{
-		pthread_mutex_lock(&(philo->meals_n_mutex));
 		if (philo->meals_n < st->eat_n)
-			return (pthread_mutex_unlock(&(philo->meals_n_mutex)), 1);
-		pthread_mutex_unlock(&(philo->meals_n_mutex));
+			return (1);
 		philo = philo->next;
 	}
-	pthread_mutex_lock(&(st->death));
 	st->die = 1;
-	pthread_mutex_unlock(&(st->death));
 	return (0);
 }
 
@@ -87,17 +83,12 @@ void	wait_death(t_data *st)
 		if (st->eat_n != -1
 			&& !check_meals(st->s_philo, st))
 			return ;
-		pthread_mutex_lock(&(philo->last_meal_mutex));
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
-			pthread_mutex_unlock(&(philo->last_meal_mutex));
-			pthread_mutex_lock(&st->death);
 			st->die = 1;
-			pthread_mutex_unlock(&st->death);
 			printf("%lu  %d   died\n", get_time() - st->time, philo->index);
 			return ;
 		}
-		pthread_mutex_unlock(&(philo->last_meal_mutex));
 		philo = philo->next;
 	}
 }

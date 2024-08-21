@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/20 09:31:23 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:49:02 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	add_back2(t_philo **philo, t_philo *new)
 	}
 }
 
-t_philo	*change_node(t_mutex *mutex, int i)
+t_philo	*change_node(int i)
 {
 	t_philo	*new;
 
@@ -40,12 +40,8 @@ t_philo	*change_node(t_mutex *mutex, int i)
 	if (!new)
 		return (NULL);
 	new->index = i + 1;
-	pthread_mutex_init(&(new->last_meal_mutex), NULL);
-	pthread_mutex_init(&(new->meals_n_mutex), NULL);
-	new->r_fork = &(mutex->mutex);
-	new->l_fork = &(mutex->next->mutex);
-	new->meals_n = 0;
 	new->next = NULL;
+	new->meals_n = 0;
 	return (new);
 }
 
@@ -54,13 +50,12 @@ void	initialze_philo(t_data *st)
 	t_philo	*philo;
 	t_philo	*new;
 	t_philo	*first;
-	t_mutex	*mutex;
 	int		i;
 
-	42 && (i = 0, philo = NULL, mutex = st->mutexs);
+	42 && (i = 0, philo = NULL);
 	while (i < st->philo_n)
 	{
-		new = change_node(mutex, i);
+		new = change_node(i);
 		if (!new)
 		{
 			write(2, "malloc error\n", 13);
@@ -70,7 +65,6 @@ void	initialze_philo(t_data *st)
 		if (!i)
 			first = new;
 		add_back2(&philo, new);
-		mutex = mutex->next;
 		i++;
 	}
 	if (new)
@@ -80,9 +74,9 @@ void	initialze_philo(t_data *st)
 
 int	initializing_threads(t_data *st)
 {
-	st->mutexs = create_mutex(st->philo_n);
-	if (!st->mutexs)
-		return (1);
+	st->sem = create_semaphore(st->philo_n);
+	if (!st->sem)
+		return (1);//free allocated
 	initialze_philo(st);
 	if (!st->s_philo)
 		return (ft_free(st, 0), 1);

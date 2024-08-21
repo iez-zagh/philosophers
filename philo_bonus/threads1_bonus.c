@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/20 09:31:23 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:56:40 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ size_t	get_time(void)
 	return ((the_time.tv_sec * 1000) + (the_time.tv_usec / 1000));
 }
 
-t_mutex	*get_last(t_mutex *philo)
+t_sem	*get_last(t_sem *philo)
 {
 	if (!philo)
 		return (NULL);
@@ -39,7 +39,7 @@ t_mutex	*get_last(t_mutex *philo)
 	return (philo);
 }
 
-void	add_back(t_mutex **philo, t_mutex *new)
+void	add_back(t_sem **philo, t_sem *new)
 {
 	if (!*philo)
 		*philo = new;
@@ -50,28 +50,30 @@ void	add_back(t_mutex **philo, t_mutex *new)
 	}
 }
 
-t_mutex	*create_mutex(int i)
+t_sem	*create_semaphore(int i)
 {
 	int		j;
-	t_mutex	*mutex1;
-	t_mutex	*new;
-	t_mutex	*first;
+	t_sem	*sem1;
+	t_sem	*new;
+	t_sem	*first;
 
 	j = 0;
-	mutex1 = NULL;
+	sem1 = NULL;
 	while (j < i)
 	{
-		new = malloc(sizeof(t_mutex));
+		new = malloc(sizeof(t_sem));
 		if (!new)
 			return (write(2, "malloc error\n", 13), NULL);
-		pthread_mutex_init(&(new->mutex), NULL);
+		new->sem = sem_open("/semaphore", O_CREAT  , 0666, 1);
+		if (new->sem == SEM_FAILED)
+			return (NULL); //free and unlik
 		new->next = NULL;
 		if (!j)
 			first = new;
-		add_back(&mutex1, new);
+		add_back(&sem1, new);
 		j++;
 	}
 	if (new)
 		new->next = first;
-	return (mutex1);
+	return (sem1);
 }
