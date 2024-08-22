@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 10:25:32 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:23:12 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ int	sleep_think(t_data *st, t_philo *philo)
 t_philo	*get_node(t_philo *philo, t_data *st)
 {
 	int			j;
+	static 	int i = 0;
 
 	j = 0;
-	// pthread_mutex_lock(&(st->var_mutex));
 	while (j < st->index)
 	{
 		philo = philo->next;
 		j++;
 	}
 	st->index++;
-	// pthread_mutex_unlock(&(st->var_mutex));
 	return (philo);
 }
 
@@ -60,13 +59,14 @@ t_philo	*init_philo(t_data *st)
 	return (philo);
 }
 
-void	*true_routine(t_data *st, t_philo *philo)
+void	*true_routine(t_data *st, t_philo *philo)// need to pass the adress of the time
 {
 	while (1)
 	{
-		
+		sem_wait(st->forks);
 		if (print(st, philo, FORK))
 			return (NULL);
+		sem_wait(st->forks);
 		if (st->philo_n == 1)
 			return (NULL);
 		if (print(st, philo, FORK))
@@ -77,20 +77,28 @@ void	*true_routine(t_data *st, t_philo *philo)
 		philo->last_meal = get_time();
 
 		ft_usleep(st->time_2_eat);
-		//let the semaphore
+		sem_post(st->forks);
+		sem_post(st->forks);
 		if (sleep_think(st, philo))
 			return (NULL);
 	}
 }
 
-void	*routine(void *arg)
+void	*routine(t_data *st, t_philo *philo)
 {
-	t_philo	*philo;
-	t_data	*st;
-
-	st = (t_data *)arg;
-	philo = init_philo(st);
+	if (philo && philo->index % 2 == 0)
+		usleep(2000);
+	pthread_create(&philo->id, NULL, check_death2(), st);
 	if (!true_routine(st, philo))
 		return (NULL);
 	return (NULL);
+}
+
+void	*check_death(void *st)
+{
+	t_data	*st;
+
+	st = (t_data *)st;
+	
+	
 }

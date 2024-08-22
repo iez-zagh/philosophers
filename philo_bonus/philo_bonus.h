@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 12:07:05 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 15:11:30 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <limits.h>
-#include <semaphore.h> 
+# include <semaphore.h> 
+# include <pthread.h> 
+# include <signal.h> 
 
 
 typedef struct s_philo
@@ -27,6 +29,7 @@ typedef struct s_philo
 	int						index;
 	int						pid;
 	unsigned long long int	last_meal;
+	pthread_t				id; 
 	struct s_philo			*next;	
 }		t_philo;
 
@@ -56,7 +59,7 @@ size_t	my_atoi(char *s);
 size_t	get_time(void);
 int		ft_usleep(useconds_t time);
 void	how_to_use(void);
-void	*routine(void *st);
+void	*routine(t_data *st, t_philo *philo);
 int		initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
 int		create_threads(t_data *st);
