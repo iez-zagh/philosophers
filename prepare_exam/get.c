@@ -10,14 +10,29 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
+char *substr2(char *str, int begin, int l)
+{
+	int i =0;
+	char *res = malloc (l + 1);
+	while (l--)
+	{
+		res[i++] = str[begin++];
+	}
+	res[begin] ='\0';
+	return (res);
+}
+
 char	*ft_one_line(char *str, int start, int end)
 {
-	int i = 0;
-	
+	if (!str)
+		return (NULL);
+	return (substr2(str, start, end))	;
 }
 
 int	ft_strchr(char *str, int a)
 {
+	if (!str)
+		return -1;
 	for (int i = 0; i < ft_strlen(str);i++)
 	{
 		if (str[i] == a)
@@ -29,21 +44,26 @@ int	ft_strchr(char *str, int a)
 
 char    *get(int fd)
 {
-    static		*buffer;
+    static		*buffer = NULL;
     char		*str;
 	char		*tmp = NULL;
 
     while (1)
     {
-		if (ft_strchr(buffer, '\n') !=  -1)
+		int j = ft_strchr(buffer, '\n');
+		if (j !=  -1)
 		{
-			return (ft_oneline(buffer));
+			return (ft_one_line(buffer, 0, j));
 			//sub the buffer to eleminate the returned line
 		}
 		str  = malloc (BUF);
 		if (!str)
 			return (NULL);
-		read(fd, str, BUF);
+		if (!read(fd, str, BUF))
+		{
+			return (NULL);
+		}
+			puts("hello");
 		return (str);
 		
     }    
