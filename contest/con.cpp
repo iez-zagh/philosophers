@@ -3,9 +3,6 @@
 int main() {
     std::ios::sync_with_stdio(false); // Faster I/O
     std::cin.tie(nullptr);
-
-    int ac;
-    std::cin >> ac; // Number of rounds (not really used here)
     
     long a = 0, b = 0; // Scores for player A and B
     std::string s;
@@ -13,35 +10,51 @@ int main() {
 
     int i = 0;
     bool f = false;
-
-    // Process the string to calculate scores
-    while (s[i]) {
-		printf("hello\n");
+    while (s[i])
+    {
         if (s[i] == 'A')
-            a++; // Increment score for A
-        else if (s[i] == 'B')
-            b++; // Increment score for B
-
-        // Check if the game is tied
-        if (a == b) {
-            f = true;
+        {
+            if (s [i + 1] == '1')
+                a++;
+            else
+                a+=2;
         }
-        i++;
+        else if (s[i] == 'B')
+        {
+            if (s [i + 1] == '1')
+                b++;
+            else
+                b+=2;
+        }
+        if (a == b && a == 10)
+                f = true;
+        // std::cout << a;std::cout << "\n";
+        // std::cout << b;
+        if (f)
+        {
+            if (a >= b+2)
+            {
+                std::cout << "A\n";return (0) ;
+            }
+            else if (a >= b+2)
+            {
+                std::cout << "B\n";return (0) ;
+            }
+        }
+        i+=2;
     }
-
-    // Determine the winner based on final scores
-    if (f) {
-        if (a >= b + 2)
-            std::cout << 'A';
-        else
-            std::cout << 'B';
-    } else {
-        if (a > b)
-            std::cout << 'A';
-        else
-            std::cout << 'B';
-    }
-
+    // if (f) {
+    //     if (a >= b + 2)
+    //         std::cout << 'A';
+    //     else
+    //         std::cout << 'B';
+    // } 
+    // else {
+    if (a > b)
+        std::cout << 'A';
+    else
+        std::cout << 'B';
+    // }
     std::cout << '\n';
     return 0;
 }
