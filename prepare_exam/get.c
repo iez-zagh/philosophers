@@ -35,8 +35,10 @@ int	ft_strchr(char *str, int a)
 		return -1;
 	for (int i = 0; i < ft_strlen(str);i++)
 	{
-		if (str[i] == a)
-			return (str[i]);
+		if (str[i] == a){
+			printf("%d]]\n", i);
+			return (i);
+		}
 	}
 	return (-1);
 }
@@ -50,6 +52,7 @@ char    *get(int fd)
 
     while (1)
     {
+		puts("hello");
 		int j = ft_strchr(buffer, '\n');
 		if (j !=  -1)
 		{
@@ -59,13 +62,12 @@ char    *get(int fd)
 		str  = malloc (BUF);
 		if (!str)
 			return (NULL);
-		if (!read(fd, str, BUF))
+		int  y = read (fd, str, BUF);
+		if (!y)
 		{
 			return (NULL);
 		}
-			puts("hello");
-		return (str);
-		
+		str[y] = '\0';
     }    
 }
 
