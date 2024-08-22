@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/03 02:06:59 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 12:18:47 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:06:19 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,6 @@ sem_t	*create_semaphore(int i)
 	sem_t	*sem1;
 
 	j = 0;
-	sem1[j] = sem_open("/sema", O_CREAT , 0644, i);//the pe
+	sem1 = sem_open("/sema", O_CREAT , 0644, i);//the pe
 	return (sem1);
 }
