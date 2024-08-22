@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/21 20:49:02 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 11:50:40 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	initialze_philo(t_data *st)
 
 int	initializing_threads(t_data *st)
 {
-	st->sem = create_semaphore(st->philo_n);
-	if (!st->sem)
+	st->forks = create_semaphore(st->philo_n);
+	if (!st->forks)
 		return (1);//free allocated
 	initialze_philo(st);
 	if (!st->s_philo)

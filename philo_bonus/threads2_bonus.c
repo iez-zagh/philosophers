@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/21 20:59:52 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:25:32 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,33 @@ int	sleep_think(t_data *st, t_philo *philo)
 	if (print(st, philo, THINK))
 		return (1);
 	return (0);
+}
+
+t_philo	*get_node(t_philo *philo, t_data *st)
+{
+	int			j;
+
+	j = 0;
+	// pthread_mutex_lock(&(st->var_mutex));
+	while (j < st->index)
+	{
+		philo = philo->next;
+		j++;
+	}
+	st->index++;
+	// pthread_mutex_unlock(&(st->var_mutex));
+	return (philo);
+}
+
+
+t_philo	*init_philo(t_data *st)
+{
+	t_philo	*philo;
+
+	philo = get_node(st->s_philo, st);
+	if (philo && philo->index % 2 == 0)
+		usleep(2000);
+	return (philo);
 }
 
 void	*true_routine(t_data *st, t_philo *philo)
@@ -61,8 +88,8 @@ void	*routine(void *arg)
 	t_philo	*philo;
 	t_data	*st;
 
-	philo = NULL;
 	st = (t_data *)arg;
+	philo = init_philo(st);
 	if (!true_routine(st, philo))
 		return (NULL);
 	return (NULL);

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/21 21:05:47 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/22 10:25:50 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	create_threads(t_data *st)
 	{
 		philo->last_meal = get_time();
 		// here fork;
+		philo->pid  = fork();
+		if (!philo->pid)
+		{
+			routine(st);
+		}
 		philo = philo->next;
 	}
 	check_death(st, n, philo);
