@@ -1,7 +1,7 @@
 #ifndef GET_H
 # define GET_H
 
-#define BUF 3
+#define BUF 100
 
 #include <stdio.h>
 #include <stdlib.h>
