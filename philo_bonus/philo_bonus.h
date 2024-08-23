@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 20:31:03 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:46:09 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_philo
 	int						pid;
 	pthread_t				id;
 	unsigned long long int	last_meal; 
-	sem_t					*meals;
+	sem_t					*last_meal_;
+	sem_t					*meals_n_;
 	struct s_philo			*next;	
 }		t_philo;
 
@@ -46,6 +47,7 @@ typedef struct s_data
 	int		time_2_eat;
 	int		time_2_sleep;
 	sem_t	*forks;
+	sem_t	*start;
 	t_philo	*s_philo;
 }		t_data;
 
@@ -67,6 +69,6 @@ void	initialze_philo(t_data *st);
 int		create_threads(t_data *st);
 void	wait_death(t_data *st, t_philo *philo);
 sem_t	*create_semaphore(int i);
-t_philo	*get_node(t_philo *philo, t_data *st, int index);
+t_philo	*get_node(t_philo *philo, int index);
 
 #endif

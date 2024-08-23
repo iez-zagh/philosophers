@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 20:33:26 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 21:36:29 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ t_philo	*change_node(int i)
 	new->next = NULL;
 	new->meals_n = 0;
 	sem_unlink("/meals");
-	new->meals = sem_open("/meals", O_CREAT , 0644, 1);
-	sem_wait(new->meals);
+	sem_unlink("/meals_n");
+	new->last_meal_ = sem_open("/last_meal", O_CREAT , 0644, 1);
+	new->meals_n_ = sem_open("/meals_n", O_CREAT , 0644, 1);
 	return (new);
 }
 
@@ -83,7 +84,9 @@ int	initializing_threads(t_data *st)
 	sem_unlink("/sema2");
     sem_unlink("/kill");
     sem_unlink("/print");
+    sem_unlink("/start");
 	st->die = sem_open("/print", O_CREAT , 0644, 1);
+	st->start = sem_open("/start", O_CREAT , 0644, 1);
 	st->die_2 = sem_open("/kill", O_CREAT , 0644, 1); // protection
 	sem_wait(st->die_2);
 	initialze_philo(st);

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 20:58:56 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 22:11:13 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,10 @@ int	main(int ac, char **av)
 
 int	check_meals(t_philo *philo, t_data *st)
 {
-	int	i;
-
-	i = 0;
-	while (i++ < st->philo_n)
-	{
-		if (philo->meals_n < st->eat_n)
-			return (1);
-		philo = philo->next;
-	}
+	sem_wait(philo->meals_n_);
+	if (philo->meals_n < st->eat_n)
+		return (sem_post(philo->meals_n_), 1);
+	sem_post(philo->meals_n_);
 	sem_wait(st->die);
 	st->die_ = 1;
 	sem_post(st->die_2);
@@ -77,18 +72,21 @@ int	check_meals(t_philo *philo, t_data *st)
 
 void	wait_death(t_data *st, t_philo *philo)
 {
+	sem_wait(st->start); //check this later
 	while (1)
 	{
 		if (st->eat_n != -1
 			&& !check_meals(st->s_philo, st))
 			return ;
+		sem_wait(philo->last_meal_);
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
 			sem_wait(st->die);
-			st->die_ = 1;
-			printf("%lu  %d   died\n", get_time() - st->time, philo->index);
+			printf("%lu %d died\n", get_time() - st->time, philo->index);
 			sem_post(st->die_2);
+			sem_post(philo->last_meal_);
 			return ;
 		}
+		sem_post(philo->last_meal_);
 	}
 }
