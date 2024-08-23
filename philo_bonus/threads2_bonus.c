@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 11:40:41 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 20:55:52 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	print(t_data *st, t_philo *philo, char *msg)
 {
 	sem_wait(st->die);
 	if (st->die_)
-		return (1);
+		return (sem_post(st->die), 1);
 	printf("%lu %d %s\n", get_time() - st->time, philo->index, msg);
 	sem_post(st->die);
 	return (0);
@@ -74,9 +74,16 @@ void	*check_death2(void *arg)
 void	*true_routine(t_data *st, t_philo *philo)// need to pass the adress of the time
 {
 	if (pthread_create(&philo->id, NULL, check_death2, st))
-		return (write(2, "error\n", 5), NULL);
+		return (write(2, "error\n", 6), NULL);
+	int	i;
+	i = 0;
 	while (1)
 	{
+		// if (!i)
+		// {
+		// 	sem_post(philo->meals);
+		// 	i++;
+		// }
 		sem_wait(st->forks);
 		if (print(st, philo, FORK))
 			exit (0);
@@ -100,8 +107,8 @@ void	*true_routine(t_data *st, t_philo *philo)// need to pass the adress of the 
 
 void	*routine(t_data *st, t_philo *philo)
 {
-	if (philo && philo->index % 2 == 0)
-		usleep(2000);
+	// if (philo && philo->index % 2 == 0)
+	// 	usleep(2000);
 	if (!true_routine(st, philo))
 		return (NULL);
 	return (NULL);

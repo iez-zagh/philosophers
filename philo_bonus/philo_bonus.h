@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 11:38:59 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 20:31:03 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,32 +20,33 @@
 # include <limits.h>
 # include <semaphore.h> 
 # include <pthread.h> 
-# include <signal.h> 
-
+# include <signal.h>
 
 typedef struct s_philo
 {
 	int						meals_n;
 	int						index;
 	int						pid;
-	unsigned long long int	last_meal;
-	pthread_t				id; 
+	pthread_t				id;
+	unsigned long long int	last_meal; 
+	sem_t					*meals;
 	struct s_philo			*next;	
 }		t_philo;
 
 typedef struct s_data
 {
-	size_t					time;
-	sem_t					*die;
-	int						die_;
-	int						index;
-	int						philo_n;
-	int						eat_n;
-	int						time_2_die;
-	int						time_2_eat;
-	int						time_2_sleep;
-	sem_t					*forks;
-	t_philo					*s_philo;
+	size_t	time;
+	sem_t	*die;
+	int		die_;
+	sem_t	*die_2;
+	int		index;
+	int		philo_n;
+	int		eat_n;
+	int		time_2_die;
+	int		time_2_eat;
+	int		time_2_sleep;
+	sem_t	*forks;
+	t_philo	*s_philo;
 }		t_data;
 
 # define EAT "is eating"
