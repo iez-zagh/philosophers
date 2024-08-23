@@ -75,7 +75,9 @@ char	*join(char *s1, char *s2)
 		return (s2);
 	if (!s2)
 		return (s1);
-	res = malloc (ft_strlen(s1) +ft_strlen(s2) +2);
+	res = malloc (ft_strlen(s1) +ft_strlen(s2) +2);\\
+
+	
 	while(s1[i])
 	{
 		res[i] = s1[i];
