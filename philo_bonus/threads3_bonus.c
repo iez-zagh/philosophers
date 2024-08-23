@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 15:11:36 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:25:40 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	check_death(t_data *st, int n, t_philo *philo)
 	}
 	sem_close(st->forks);
     sem_unlink("/sema2");
+    sem_unlink("/print");
 	// ft_free(st, 1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 17:22:31 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:38:45 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,25 @@ int	check_meals(t_philo *philo, t_data *st)
 			return (1);
 		philo = philo->next;
 	}
-	st->die = 1;
+	sem_wait(st->die);
+	st->die_ = 1;
 	return (0);
 }
 
-void	wait_death(t_data *st)
+void	wait_death(t_data *st, t_philo *philo)
 {
-	t_philo	*philo;
-
-	philo = st->s_philo;
-	while (philo)
+	while (1)
 	{
 		if (st->eat_n != -1
 			&& !check_meals(st->s_philo, st))
 			return ;
 		if (get_time() - philo->last_meal > (size_t)st->time_2_die)
 		{
-			st->die = 1;
+			sem_wait(st->die);
+			st->die_ = 1;
 			printf("%lu  %d   died\n", get_time() - st->time, philo->index);
+			// sem_wait(st->die)
 			return ;
 		}
-		philo = philo->next;
 	}
 }

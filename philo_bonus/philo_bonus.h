@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/22 15:11:30 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/23 11:38:59 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ typedef struct s_philo
 typedef struct s_data
 {
 	size_t					time;
-	int						die;
+	sem_t					*die;
+	int						die_;
 	int						index;
 	int						philo_n;
 	int						eat_n;
@@ -63,8 +64,8 @@ void	*routine(t_data *st, t_philo *philo);
 int		initializing_threads(t_data *st);
 void	initialze_philo(t_data *st);
 int		create_threads(t_data *st);
-void	wait_death(t_data *st);
+void	wait_death(t_data *st, t_philo *philo);
 sem_t	*create_semaphore(int i);
-t_philo	*get_node(t_philo *philo, t_data *st);
+t_philo	*get_node(t_philo *philo, t_data *st, int index);
 
 #endif
