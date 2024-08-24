@@ -6,18 +6,18 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 19:37:33 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 20:00:07 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-void	print(t_data *st, t_philo *philo, char *msg)
+int	print(t_data *st, t_philo *philo, char *msg)
 {
 	sem_wait(st->die);
 	printf("%lu %d %s\n", get_time() - st->time, philo->index, msg);
 	sem_post(st->die);
-	// return (0);
+	return (0);
 }
 
 int	sleep_think(t_data *st, t_philo *philo)
