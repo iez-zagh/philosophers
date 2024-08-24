@@ -4,9 +4,8 @@ YELLOW_TEXT = \033[1;33m
 RESET_TEXT = \033[0m
 
 NAME = philo
-BONUS = philo_bonusB
-R=-fsanitize=thread
-# CFLAGS = -Wall -Werror -Wextra
+CC=cc
+CFLAGS = -Wall -Werror -Wextra
 
 M_SOURCES = philos.c philo.c parser1.c threads1.c threads2.c threads3.c ft_free.c
 

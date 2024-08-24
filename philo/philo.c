@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/21 11:51:59 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 23:24:01 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,8 @@ int	parser(int ac, char **av)
 	return (initializing_threads(&st));
 }
 
-void	f(void)
-{
-	system("leaks philo");
-}
-
 int	main(int ac, char **av)
 {
-	// atexit (f);
 	if (ac < 5 || ac > 6)
 	{
 		write(2, "invalid number of args\n", 23);

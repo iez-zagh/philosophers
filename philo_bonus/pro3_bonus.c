@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 11:48:35 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 19:30:11 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 23:10:47 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	check_death(t_data *st, int n, t_philo *philo)
 	int	i;
 
 	i = 0;
-	sem_post(st->start);
 	sem_wait(st->die_2);
 	while (i < n)
 	{
@@ -25,7 +24,7 @@ void	check_death(t_data *st, int n, t_philo *philo)
 		sem_close(philo->meals_n_);
 		sem_unlink("/meals_n");
 		sem_unlink("/last_meal");
-		kill(philo->pid, SIGINT);
+		kill(philo->pid, SIGKILL);
 		i++;
 		philo = philo->next;
 	}
@@ -62,6 +61,7 @@ int	create_philos(t_data *st)
 			st->index++;
 		}
 	}
+	sem_post(st->start);
 	check_death(st, n, philo);
 	return (0);
 }

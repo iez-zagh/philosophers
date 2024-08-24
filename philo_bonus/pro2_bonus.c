@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 20:00:07 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 23:11:08 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	*check_death2(void *arg)
 
 void	*true_routine(t_data *st, t_philo *philo)
 {
+	philo->ppid = getppid();
 	if (pthread_create(&philo->id, NULL, check_death2, st))
 		return (write(2, "thread error\n", 13), NULL);
 	while (1)
@@ -68,8 +69,6 @@ void	*true_routine(t_data *st, t_philo *philo)
 		if (print(st, philo, FORK))
 			exit (0);
 		sem_wait(st->forks);
-		if (st->philo_n == 1)
-			exit (0);
 		if (print(st, philo, FORK))
 			exit (0);
 		if (print(st, philo, EAT))

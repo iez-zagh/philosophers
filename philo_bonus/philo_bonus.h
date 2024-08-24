@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 19:33:24 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 23:18:42 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,15 @@
 
 typedef struct s_philo
 {
-	int						meals_n;
-	int						index;
-	int						pid;
-	pthread_t				id;
-	unsigned long long int	last_meal;
-	sem_t					*last_meal_;
-	sem_t					*meals_n_;
-	struct s_philo			*next;	
+	int								meals_n;
+	int								index;
+	int								pid;
+	int								ppid;
+	pthread_t						id;
+	unsigned long long int			last_meal;
+	sem_t							*last_meal_;
+	sem_t							*meals_n_;
+	struct s_philo					*next;	
 }		t_philo;
 
 typedef struct s_data
