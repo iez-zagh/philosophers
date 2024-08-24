@@ -6,18 +6,18 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:03:07 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 15:16:07 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 19:37:33 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
 
-int	print(t_data *st, t_philo *philo, char *msg)
+void	print(t_data *st, t_philo *philo, char *msg)
 {
 	sem_wait(st->die);
 	printf("%lu %d %s\n", get_time() - st->time, philo->index, msg);
 	sem_post(st->die);
-	return (0);
+	// return (0);
 }
 
 int	sleep_think(t_data *st, t_philo *philo)
@@ -61,7 +61,7 @@ void	*check_death2(void *arg)
 void	*true_routine(t_data *st, t_philo *philo)
 {
 	if (pthread_create(&philo->id, NULL, check_death2, st))
-		return (write(2, "error\n", 6), NULL);
+		return (write(2, "thread error\n", 13), NULL);
 	while (1)
 	{
 		sem_wait(st->forks);
