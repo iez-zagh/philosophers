@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/21 20:52:39 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 15:16:48 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,13 @@ void	how_to_use(void)
 	write(1, "  Runs with 5 philosophers, 800ms to die,", 43);
 	write(1, " 200ms to eat, 100ms to sleep, and each must eat", 48);
 	write(1, " 7 times at least.\n", 20);
+}
+
+void	*routine(t_data *st, t_philo *philo)
+{
+	if (philo && !philo->index % 2)
+		usleep(2000);
+	if (!true_routine(st, philo))
+		return (NULL);
+	return (NULL);
 }

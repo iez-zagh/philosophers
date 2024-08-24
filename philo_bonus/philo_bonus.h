@@ -6,12 +6,12 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:32 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 21:46:09 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 15:17:22 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 # include <sys/time.h>
 # include <unistd.h>
@@ -28,7 +28,7 @@ typedef struct s_philo
 	int						index;
 	int						pid;
 	pthread_t				id;
-	unsigned long long int	last_meal; 
+	unsigned long long int	last_meal;
 	sem_t					*last_meal_;
 	sem_t					*meals_n_;
 	struct s_philo			*next;	
@@ -38,7 +38,6 @@ typedef struct s_data
 {
 	size_t	time;
 	sem_t	*die;
-	int		die_;
 	sem_t	*die_2;
 	int		index;
 	int		philo_n;
@@ -64,11 +63,12 @@ size_t	get_time(void);
 int		ft_usleep(useconds_t time);
 void	how_to_use(void);
 void	*routine(t_data *st, t_philo *philo);
-int		initializing_threads(t_data *st);
+int		initializing_philos(t_data *st);
 void	initialze_philo(t_data *st);
-int		create_threads(t_data *st);
+int		create_philos(t_data *st);
 void	wait_death(t_data *st, t_philo *philo);
 sem_t	*create_semaphore(int i);
 t_philo	*get_node(t_philo *philo, int index);
+void	*true_routine(t_data *st, t_philo *philo);
 
 #endif

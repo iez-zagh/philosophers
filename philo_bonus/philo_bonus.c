@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/02 00:18:15 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/23 22:11:13 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 15:39:22 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parser(int ac, char **av)
 		|| st.time_2_eat == -1 || st.time_2_sleep == -1)
 		return (write(2, "some thing wrong in the args\n", 29)
 			, how_to_use(), 1);
-	return (initializing_threads(&st));
+	return (initializing_philos(&st));
 }
 
 void	f(void)
@@ -61,18 +61,17 @@ int	main(int ac, char **av)
 int	check_meals(t_philo *philo, t_data *st)
 {
 	sem_wait(philo->meals_n_);
-	if (philo->meals_n < st->eat_n)
+	if (philo->meals_n <= st->eat_n)
 		return (sem_post(philo->meals_n_), 1);
 	sem_post(philo->meals_n_);
 	sem_wait(st->die);
-	st->die_ = 1;
 	sem_post(st->die_2);
 	return (0);
 }
 
 void	wait_death(t_data *st, t_philo *philo)
 {
-	sem_wait(st->start); //check this later
+	sem_wait(st->start);
 	while (1)
 	{
 		if (st->eat_n != -1
