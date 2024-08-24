@@ -6,7 +6,7 @@
 /*   By: iez-zagh <iez-zagh@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 00:03:02 by iez-zagh          #+#    #+#             */
-/*   Updated: 2024/08/24 16:14:41 by iez-zagh         ###   ########.fr       */
+/*   Updated: 2024/08/24 17:39:06 by iez-zagh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	initializing_philos(t_data *st)
 	st->die = sem_open("/print", O_CREAT, 0644, 1);
 	st->start = sem_open("/start", O_CREAT, 0644, 1);
 	st->die_2 = sem_open("/kill", O_CREAT, 0644, 1);
+	st->die = SEM_FAILED;
+	if (st->die == SEM_FAILED || st->start == SEM_FAILED || st->die_2 == SEM_FAILED)
+		return (1);
 	sem_wait(st->die_2);
 	initialze_philo(st);
 	if (!st->s_philo)
